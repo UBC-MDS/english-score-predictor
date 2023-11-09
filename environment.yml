@@ -1,0 +1,11 @@
+name: '522'
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11.6
+  - numpy
+  - pandas
+  - scikit-learn
+  - ipykernel
+prefix: /Users/farrandi/miniconda3/envs/522
