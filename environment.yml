@@ -1,4 +1,4 @@
-name: '522'
+name: "522"
 channels:
   - conda-forge
   - defaults
@@ -8,4 +8,10 @@ dependencies:
   - pandas
   - scikit-learn
   - ipykernel
+  - altair
+  - vega_datasets
+  - vegafusion
+  - vegafusion-jupyter
+  - vegafusion-python-embed
+  - matplotlib
 prefix: /Users/farrandi/miniconda3/envs/522
