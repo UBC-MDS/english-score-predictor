@@ -6,7 +6,7 @@ We welcome all contributions to this project! Your input and support are essenti
 
 If you notice a bug or have a feature request, please help us by opening an issue in our GitHub repository:
 
-- **Open an Issue**: You can report bugs or suggest features [here](link).
+- **Open an Issue**: You can report bugs or suggest features [here](https://github.com/UBC-MDS/522-workflows-group-18/issues).
 
 ## How to Contribute
 
