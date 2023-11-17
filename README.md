@@ -19,7 +19,10 @@ Welcome to our project, "English Language Learning Ability Prediction", an innov
 
 ### Installing
 - Clone the repository:
-git clone [repository link]
+git clone [https://github.com/UBC-MDS/522-workflows-group-18]
 cd 522-workflows-group
+- Create and activate the conda environment:
+
+
 
 
