@@ -70,7 +70,7 @@ We employ a comprehensive approach:
 
 ## 📈 Results and Discussion
 
-TO BE ADDED
+Our analysis, based on a dataset of approximately 200,000 individuals, shows that factors such as age, education, and language background significantly predict English proficiency. The regression model achieved a 5.3% RMSE on test data, confirming the reliability of these predictors in assessing language skills. Notably, being a native English speaker emerged as the strongest positive predictor, while immersion in English learning showed a strong negative correlation. These findings reinforce that demographic and educational backgrounds are crucial in language acquisition. This opens avenues for future research, particularly in understanding how cultural exposure influences language proficiency, potentially leading to more effective and personalized language learning strategies.
 
 ---
 
