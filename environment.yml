@@ -14,5 +14,6 @@ dependencies:
   - vegafusion-jupyter
   - vegafusion-python-embed
   - matplotlib
+  - scipy
   - vl-convert-python[version='>=0.14.0']
 prefix: /Users/farrandi/miniconda3/envs/522
