@@ -63,8 +63,8 @@ We employ a comprehensive approach:
 
 1. **Data Preprocessing:** Cleaning, normalization, and transformation of data to ensure quality and consistency.
 2. **Exploratory Data Analysis:** Utilizing statistical techniques and visualization tools to uncover trends and patterns.
-3. **Model Development:** TO BE ADDED
-4. **Model Evaluation:** TO BE ADDED
+3. **Model Development:** We developed predictive models by employing Ridge and Lasso regression techniques to ascertain the weight of each variable in predicting English language proficiency. By fine-tuning these models, we aimed to minimize prediction errors and enhance the accuracy of our forecasts.
+4. **Model Evaluation:** Our models were rigorously evaluated using cross-validation techniques and a variety of performance metrics such as R-squared, Root Mean Squared Error (RMSE), and Negative Mean Squared Error (NMSE), ensuring their robustness and reliability in predicting language learning ability.
 
 ---
 
