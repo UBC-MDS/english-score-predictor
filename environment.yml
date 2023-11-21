@@ -9,10 +9,10 @@ dependencies:
   - scikit-learn=1.3.*
   - ipykernel=6.26.*
   - altair=5.1.*
-  - vega_datasets=0.9.*
-  - vegafusion=1.4.*
-  - vegafusion-jupyter=1.4.*
-  - vegafusion-python-embed=1.4.*
+  - vega_datasets
+  - vegafusion
+  - vegafusion-jupyter
+  - vegafusion-python-embed
   - matplotlib=3.8.*
   - scipy=1.11.*
   - vl-convert-python[version='>=0.14.0']
