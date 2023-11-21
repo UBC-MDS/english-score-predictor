@@ -1,19 +1,21 @@
-name: '522'
+name: "522"
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python=3.11.6
-  - numpy
-  - pandas
-  - scikit-learn
-  - ipykernel
-  - altair
-  - vega_datasets
-  - vegafusion
-  - vegafusion-jupyter
-  - vegafusion-python-embed
-  - matplotlib
-  - scipy
+  - python=3.11.*
+  - numpy=1.26.*
+  - pandas=2.1.*
+  - scikit-learn=1.3.*
+  - ipykernel=6.26.*
+  - altair=5.1.*
+  - vega_datasets=0.9.*
+  - vegafusion=1.4.*
+  - vegafusion-jupyter=1.4.*
+  - vegafusion-python-embed=1.4.*
+  - matplotlib=3.8.*
+  - scipy=1.11.*
   - vl-convert-python[version='>=0.14.0']
+  - jupyterlab=4.0.*
+  - jupyterlab-git=0.41.*
 prefix: /Users/farrandi/miniconda3/envs/522
