@@ -55,6 +55,8 @@ jupyter lab
 docker compose up # add -d flag to run in detached mode
 ```
 
+- Open the link shown in the terminal to access Jupyter Notebook.
+
 - to close the container:
 
 ```bash
