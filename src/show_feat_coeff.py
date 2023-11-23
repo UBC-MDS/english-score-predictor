@@ -31,7 +31,8 @@ def show_feat_coeff(pipe_obj, model_name, X):
     Examples:
     --------
     >>> import pandas as pd
-    >>> from sklearn.pipeline import Pipeline # To create Pipeline object below must import
+    >>> from sklearn.pipeline import Pipeline 
+    >>> from sklearn.linear_model import Lasso, Ridge, LinearRegression
     # Replace StandardScaler with desired preprocessing step(s)
     # Replace Lasso model with desired regression model (e.g. Ridge, LinearRegression)
     >>> pipe = Pipeline([('stdsclr', StandardScaler()), ('lasso', Lasso())]) 
