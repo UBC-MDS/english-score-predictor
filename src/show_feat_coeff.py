@@ -6,8 +6,8 @@ def show_feat_coeff(pipe_obj, model_name, X):
     Show the estimated feature coefficients for a learned regression model. 
 
     Creates a new DataFrame with one column, whose index is the column names of the input 
-    array of examples, listing the estimated feature coefficients for the corresponding
-    features in the input array.
+    data frame of examples, listing the estimated feature coefficients for the corresponding
+    features in the input data frame.
 
     Parameters:
     ----------
@@ -16,9 +16,9 @@ def show_feat_coeff(pipe_obj, model_name, X):
         get coefficient values. 
     model_name : str
         The name of the regression model as per the Pipeline object named steps.
-    X : array-like shape (n_samples, n_features)
-        The input array-like shape containing the training data on which the input Pipeline object was fit.
-        The n_features dimension of the array-like shape will indicate the number of coefficient values to 
+    X : pandas.DataFrame (n_samples, n_features)
+        The input data frame containing the training data on which the input Pipeline object was fit.
+        The n_features dimension of the data frame will indicate the number of coefficient values to 
         be returned corresponding to the column names for the n_features.
 
     Returns:
@@ -26,7 +26,7 @@ def show_feat_coeff(pipe_obj, model_name, X):
     pandas.DataFrame
         A DataFrame with one column:
         - 'Coefficients': Lists the estimated feature coefficients for the input regression model.
-        whose index is the column names of the input array of test samples (X)
+        whose index is the column names of the input data frame of test samples (X)
         
     Examples:
     --------
