@@ -15,7 +15,7 @@ import unittest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.show_feat_coeff import show_feat_coeff
 
-class TestPearsonCorrelationMatrix(unittest.TestCase):
+class TestShowFeatCoeff(unittest.TestCase):
 
     def setUp(self):
         # Create simple data for testing
