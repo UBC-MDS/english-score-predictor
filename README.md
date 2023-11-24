@@ -31,14 +31,36 @@ We utilized a subset of a dataset originally compiled from 680,333 participants,
 
 ```bash
 git clone [https://github.com/UBC-MDS/522-workflows-group-18]
-cd 522-workflows-group
+cd 522-workflows-group-18
 ```
+
+#### Running the code locally with conda environment
 
 - Create and activate the conda environment:
 
 ```bash
 conda env create -f environment.yml
 conda activate 522
+```
+
+- Launch Jupyter Notebook:
+
+```bash
+jupyter lab
+```
+
+#### Running the code via Docker container
+
+```bash
+docker compose up # add -d flag to run in detached mode
+```
+
+- Open the link shown in the terminal to access Jupyter Notebook.
+
+- to close the container:
+
+```bash
+docker compose down
 ```
 
 ---
