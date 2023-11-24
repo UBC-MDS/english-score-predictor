@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt
+import matplotlib as plt
 import numpy as np
 
 
@@ -21,16 +21,19 @@ def plt_regr_pred(X, y, pipe_obj):
 
     Returns:
     -------
-    None
-        Plot of actual target values against predictied target values will be shown as output of calling function.
+    matplotlib Axes object
+        Returns the Axes object representing the subplot of actual target values against predictied target values. 
+        Plot will be shown as output of calling function.
         
     Examples:
     --------
     >>> import matplotlib.pyplot as plt
-    >>> import numpy as np
-    >>> # Assume preprocessor object has been defined with appropriate feature transformations 
+    >>> from sklearn.pipeline import Pipeline 
+    >>> from sklearn.linear_model import Lasso, Ridge, LinearRegression
+    >>> from sklearn.preprocessing import StandardScaler
+    # Replace StandardScaler with desired preprocessing step(s)
     # Replace Lasso model with desired regression model (e.g. Ridge, LinearRegression)
-    >>> pipe = Pipeline([preprocessor, ('lasso', Lasso())]) 
+    >>> pipe = Pipeline([('stdsclr', StandardScaler()), ('lasso', Lasso())]) 
     >>> pipe.fit(X_train, y_train)
     >>> plt_regr_pred(X_train, y_train, pipe)
     
@@ -40,10 +43,15 @@ def plt_regr_pred(X, y, pipe_obj):
     This function also uses the matplotlib pyplot module for plotting.
 
     """
-    plt.scatter(y, pipe_obj.predict(X), alpha=0.3)
+    # Creating new figure and set of subplots
+    fig, ax = plt.subplots()
+    # Plot actual y against predicted values based on X using our pipe object
+    ax.scatter(y, pipe_obj.predict(X), alpha=0.3)
+    # Plot the diagonal ("perfect prediction" line)
     grid = np.linspace(y.min(), y.max(), 1000)
-    plt.plot(grid, grid, "--k")
-    plt.xlabel("Actual Target")
-    plt.ylabel("Predicted Target")
+    ax.plot(grid, grid, "--k")
+    # Add labels and show plot
+    ax.set_xlabel("Actual Target")
+    ax.set_ylabel("Predicted Target")
     plt.show()
-    return None
+    return ax
