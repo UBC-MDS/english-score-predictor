@@ -19,7 +19,8 @@ class TestPearsonCorrelationMatrix(unittest.TestCase):
 
     def setUp(self):
         # Create simple data for testing
-        self.ridge_pipe = Pipeline([('stdsclr', StandardScaler()), ('ridge', Ridge())])
+        pipe = Pipeline([('stdsclr', StandardScaler()), ('ridge', Ridge())])
+        y_three_feats = np.array([3, 6, 4, 4, 1, 6]).T
         self.model_name = 'ridge'
         self.X_three_feats = pd.DataFrame(
             data = np.array(
@@ -29,6 +30,8 @@ class TestPearsonCorrelationMatrix(unittest.TestCase):
             ).T,
             columns = ['feat1', 'feat2', 'feat1']
         )
+        # Fit pipeline so that we can access coefficents
+        self.ridge_pipe = pipe.fit(self.X_three_feats, y_three_feats)
 
     def test_show_feat_coeff_returns_dataframe(self):
         # Test for correct return type
