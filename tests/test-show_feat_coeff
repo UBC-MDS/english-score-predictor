@@ -10,9 +10,8 @@ from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 
 import unittest
-import helper
 
-# Import the count_classes function from the src folder
+# Import the show_feat_coeff function from the src folder
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.show_feat_coeff import show_feat_coeff
 
