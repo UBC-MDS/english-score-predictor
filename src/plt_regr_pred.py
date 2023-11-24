@@ -12,11 +12,11 @@ def plt_regr_pred(X, y, pipe_obj):
     pipe_obj : Pipeline
         The fitted input pipeline of transformers with a regression model estimator. Pipeline must be fitted to 
         be able to call `predict`. 
-    X : array-like shape (n_samples, n_features)
-        The input array-like shape containing the training data on which the input Pipeline object was fit.
+    X : pandas.DataFrame (n_samples, n_features)
+        The input data frame containing the training data on which the input Pipeline object was fit.
         This training data will be used to predict the target values using the Pipeline object.
-    y : array-like of shape (n_samples,)
-        The input array-like shape of n_samples number of entries containing the target values associated with the
+    y : pandas.DataFrame (n_samples,)
+        The input data frame shape of n_samples number of entries containing the target values associated with the
         training data X and on which the Pipeline object was fit. These are the actual target values.
 
     Returns:
@@ -28,6 +28,7 @@ def plt_regr_pred(X, y, pipe_obj):
     Examples:
     --------
     >>> import matplotlib.pyplot as plt
+    >>> import numpy as np
     >>> from sklearn.pipeline import Pipeline 
     >>> from sklearn.linear_model import Lasso, Ridge, LinearRegression
     >>> from sklearn.preprocessing import StandardScaler

@@ -20,9 +20,9 @@ class TestShowFeatCoeff(unittest.TestCase):
     def setUp(self):
         # Create simple data for testing
         pipe = Pipeline([('stdsclr', StandardScaler()), ('ridge', Ridge())])
-        y_three_feats = np.array([3, 6, 4, 4, 1, 6]).T
+        y = np.array([3, 6, 4, 4, 1, 6]).T
         self.model_name = 'ridge'
-        self.X_three_feats = pd.DataFrame(
+        self.X = pd.DataFrame(
             data = np.array(
                 [[  1,    5,    4,   3,   0,    9],
                 [0.1,  0.3, -0.4,   0, 0.8, -0.9],
@@ -31,24 +31,24 @@ class TestShowFeatCoeff(unittest.TestCase):
             columns = ['feat1', 'feat2', 'feat1']
         )
         # Fit pipeline so that we can access coefficents
-        self.ridge_pipe = pipe.fit(self.X_three_feats, y_three_feats)
+        self.pipe_obj = pipe.fit(self.X, y)
 
     def test_show_feat_coeff_returns_dataframe(self):
         # Test for correct return type
-        result = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
+        result = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
         self.assertIsInstance(result, pd.DataFrame, "show_feat_coeff should return a pandas DataFrame")
 
     def test_show_feat_coeff_number_of_rows(self):
         # Test for correct number of rows in returned Data Frame as in input X
-        result = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
+        result = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
         self.assertEqual(result.shape[0], 
-                         self.X_three_feats.shape[0], 
+                         self.X[0], 
                          "result should have same number of rows as input data frame"
         )
 
     def test_show_feat_coeff_output(self):
         # Test for correct values in the data frame
-        result = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
+        result = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
         output_df = pd.DataFrame(
             data = np.array(
                 [1.511837, 0.169247, -0.433128]).T,
@@ -60,22 +60,22 @@ class TestShowFeatCoeff(unittest.TestCase):
     def test_show_feat_coeff_model_name_in_pipeline(self):
         # Test for model name present in pipeline named steps
         self.assertIn(self.model_name, 
-                      self.ridge_pipe.named_steps,
+                      self.pipe_obj.named_steps,
                       "model name must be present in pipeline named steps")
     
     def test_show_feat_coeff_column_name(self):
         # Test if the column name is 'Coefficients'
-        result_df = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
+        result_df = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
         self.assertEqual(result_df.columns.tolist(), ['Coefficients'])
 
     def test_show_feat_coeff_index_match(self):
         # Test if the index is the same as the input dataframe columns
-        result_df = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
-        self.assertEqual(result_df.index.tolist(), self.X_three_feats.columns.tolist())
+        result_df = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
+        self.assertEqual(result_df.index.tolist(), self.X.columns.tolist())
 
     def test_value_type(self):
         # Test if the coefficent values are floats
-        result_df = show_feat_coeff(self.ridge_pipe, self.model_name, self.X_three_feats)
+        result_df = show_feat_coeff(self.pipe_obj, self.model_name, self.X)
         self.assertEqual(result_df['Coefficients'].dtype, float)
 
 
