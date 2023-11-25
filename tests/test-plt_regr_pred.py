@@ -1,6 +1,6 @@
 # Adapted from https://github.com/ttimbers/demo-tests-ds-analysis-python/blob/main/tests/test-count_classes.py
 
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pytest
