@@ -15,16 +15,24 @@ from src.search_top_models import fit_and_return_top_models
 class TestFitAndReturnTopModels(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # This method will run once before all tests
+        """
+        This method will run once before all tests to create the test dataset
+        """
         cls.X_train, cls.y_train = cls.create_dummy_dataset()
 
     @staticmethod
     def create_dummy_dataset():
+        """
+        Create a dummy dataset for testing
+        """
         X, y = make_classification(n_samples=30, n_features=50, random_state=123)
         return pd.DataFrame(X), pd.Series(y)
 
     @staticmethod
     def create_search_object(search_type="random"):
+        """
+        Create a search object for testing
+        """
         ridge = Ridge()
         if search_type == "random":
             search = RandomizedSearchCV(ridge, {"alpha": [1, 2, 3, 4, 5]}, n_iter=3)
@@ -60,7 +68,7 @@ class TestFitAndReturnTopModels(unittest.TestCase):
 
     def test_train_score_false(self):
         """
-        Test that the returned DataFrame has the correct columns
+        Test without including train score
         """
         search = self.create_search_object()
         columns_expected = [
