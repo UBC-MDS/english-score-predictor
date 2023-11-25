@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-import altair as alt
 import sys
 import os
 import unittest
+import matplotlib.pyplot as plt
 
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
@@ -15,49 +15,49 @@ from src.plot_histogram_with_exclusions import plot_histogram_with_exclusions
 class TestPlotHistogramWithExclusions(unittest.TestCase):
 
     def setUp(self):
-        # Basic numeric DataFrame
-        self.df_numeric = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+        # Test data setup
+        self.df = pd.DataFrame({
+            'A': [1, 2, 3, 4, 5],
+            'B': [5, 4, 3, 2, 1],
+            'C': [2, 3, 4, 5, 6],
+            'D': ['a', 'b', 'c', 'd', 'e']  # Non-numeric column
+        })
 
-        # Mixed data types
-        self.df_mixed = pd.DataFrame({'Numeric': [1, 2, 3], 'Text': ['x', 'y', 'z'], 'Boolean': [True, False, True]})
-
-        # DataFrame with missing values
-        self.df_missing = pd.DataFrame({'A': [1, np.nan, 3], 'B': [4, np.nan, 6]})
-
-        # Empty DataFrame
-        self.df_empty = pd.DataFrame()
-
-        # Large DataFrame
-        self.df_large = pd.DataFrame(np.random.rand(1000, 4), columns=['A', 'B', 'C', 'D'])
-
-    def test_numeric_columns_only(self):
-        result = plot_histogram_with_exclusions(self.df_numeric)
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_mixed_column_types(self):
-        result = plot_histogram_with_exclusions(self.df_mixed)
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_with_missing_values(self):
-        result = plot_histogram_with_exclusions(self.df_missing)
-        self.assertIsInstance(result,alt.vegalite.v5.api.VConcatChart)
-
-    def test_empty_dataframe(self):
-        result = plot_histogram_with_exclusions(self.df_empty)
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_large_dataframe(self):
-        result = plot_histogram_with_exclusions(self.df_large)
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_columns_exclusion_non_existing(self):
-        result = plot_histogram_with_exclusions(self.df_numeric, ['NonExistingColumn'])
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_all_columns_excluded(self):
-        result = plot_histogram_with_exclusions(self.df_numeric, ['A', 'B'])
-        self.assertIsInstance(result, alt.vegalite.v5.api.VConcatChart)
-
-    def test_invalid_input_type(self):
+    def test_dataframe_validation(self):
+        # Test that a TypeError is raised when a non-dataframe is passed
         with self.assertRaises(TypeError):
             plot_histogram_with_exclusions("not a dataframe")
+
+    def test_excluded_columns(self):
+        # Test that excluded columns are not in the output
+        excluded_column = 'B'
+        axes = plot_histogram_with_exclusions(self.df, columns_to_exclude=[excluded_column])
+        included_columns = [ax.get_title().strip('Histogram of ') for ax in axes.flatten()]
+        self.assertNotIn(excluded_column, included_columns)
+
+    def test_numeric_columns_only(self):
+        # Test that only numeric columns are considered for histograms
+        axes = plot_histogram_with_exclusions(self.df)
+        included_columns = [ax.get_title().strip('Histogram of ') for ax in axes.flatten()]
+        self.assertNotIn('D', included_columns)  # 'D' is non-numeric and should not be included
+
+    def test_return_type(self):
+        # Test that the return type is correct (matplotlib AxesSubplot or ndarray of them)
+        result = plot_histogram_with_exclusions(self.df)
+        self.assertTrue(isinstance(result, (plt.Axes, np.ndarray)))
+
+    def test_fig_size(self):
+        # Test that the figure size is correctly applied
+        fig_width, fig_height = 10, 5
+        plot_histogram_with_exclusions(self.df, fig_size=(fig_width, fig_height))
+        figures = [plt.figure(i) for i in plt.get_fignums()]
+        for fig in figures:
+            self.assertEqual(fig.get_size_inches()[0], fig_width)
+            self.assertEqual(fig.get_size_inches()[1], fig_height)
+
+    def tearDown(self):
+        # Cleanup (close figures, etc.)
+        plt.close('all')
+
+if __name__ == '__main__':
+    unittest.main()

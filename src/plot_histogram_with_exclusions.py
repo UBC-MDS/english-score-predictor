@@ -1,47 +1,48 @@
 import pandas as pd
-import altair as alt
 
-def plot_histogram_with_exclusions(df, columns_to_exclude=None, bins=50, figsize=(20, 15)):
+def plot_histogram_with_exclusions(df, columns_to_exclude=None, bin=50, fig_size=(20, 15)):
     """
-    Plot histograms for each numeric column in a DataFrame, excluding specified columns.
+    Plots histograms for numeric columns in the provided DataFrame, with an option to exclude specific columns.
 
-    This function creates a histogram for each numeric column in the provided DataFrame,
-    allowing for specified columns to be excluded from the plot. It uses Altair for
-    visualization, which is well-suited for handling large datasets.
+    This function filters the numeric columns in the DataFrame and generates a histogram for each one,
+    except for those specified to be excluded. It is designed to handle larger datasets by enabling
+    Altair's 'vegafusion' data transformer.
 
     Parameters
     ----------
     df : pandas.DataFrame
-        The DataFrame containing the data to be plotted.
+        The DataFrame containing the data to plot.
     columns_to_exclude : list of str, optional
-        A list of column names to be excluded from the histogram plots.
-        If a column in this list does not exist in the DataFrame, it will be ignored.
-        Defaults to None, meaning no columns will be excluded.
-    bins : int, optional
+        A list of column names to exclude from the histogram plots. If a column name specified does not exist,
+        it will be ignored. Defaults to None, in which case no columns are excluded.
+    bin : int, optional
         The number of bins to use for the histograms. Defaults to 50.
-    figsize : tuple of int, optional
-        The size of the figure for the histograms, provided as a tuple (width, height).
-        Defaults to (20, 15).
+    fig_size : tuple of int, optional
+        The size of the figure for each histogram, specified as (width, height). Defaults to (20, 15).
 
     Returns
     -------
-    altair.vegalite.v4.api.VConcatChart
-        An Altair VConcatChart object that displays the histograms for each numeric column
-        not excluded.
+    matplotlib.AxesSubplot or numpy.ndarray of them
+        One or several matplotlib AxesSubplot objects depending on the number of numeric columns
+        in the DataFrame, each representing a histogram for a particular column.
+
+    Raises
+    ------
+    TypeError
+        If the input `df` is not a pandas DataFrame.
 
     Examples
     --------
     >>> df = pd.DataFrame({'A': [1, 2, 3, 4, 5], 'B': [5, 4, 3, 2, 1], 'C': ['a', 'b', 'c', 'd', 'e']})
-    >>> histogram_plot = plot_histogram_with_exclusions(df, columns_to_exclude=['B'])
-    >>> histogram_plot.display()
+    >>> plot_histogram_with_exclusions(df, columns_to_exclude=['B'])
+    >>> plt.show()  # Do not forget to import matplotlib.pyplot as plt to display the plots.
 
     Notes
     -----
-    To handle larger datasets efficiently, this function enables Altair's 'vegafusion' data transformer.
+    The function uses matplotlib as the underlying plotting library, which integrates with pandas.
+    The histograms will be displayed immediately if running in a Jupyter notebook. In a script,
+    you may need to call `plt.show()` to display the figures.
     """
-
-    # Enable Altair data transformer for efficient handling of larger datasets
-    alt.data_transformers.enable("vegafusion")
     
     if not isinstance(df, pd.DataFrame):
         raise TypeError("Input must be a pandas DataFrame")
@@ -51,17 +52,5 @@ def plot_histogram_with_exclusions(df, columns_to_exclude=None, bins=50, figsize
     if columns_to_exclude:
         numeric_cols = [col for col in numeric_cols if col not in columns_to_exclude]
 
-    # Create histograms for each numeric column
-    charts = [
-        alt.Chart(df).mark_bar().encode(
-            alt.X(f"{col}:Q", bin=alt.Bin(maxbins=bins)),
-            y='count()'
-        ).properties(
-            width=figsize[0],
-            height=figsize[1],
-            title=f'Histogram of {col}'
-        ) for col in numeric_cols
-    ]
 
-    # Concatenate all charts vertically
-    return alt.vconcat(*charts)
+    return df[numeric_cols].hist(bins=bin, figsize=fig_size)
