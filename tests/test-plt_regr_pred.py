@@ -50,6 +50,8 @@ class TestPltRegrPred(unittest.TestCase):
         result = plt_regr_pred(self.X, self.y, self.pipe_obj)
         self.assertEqual(result.get_xlabel(), "Actual Target")
         self.assertEqual(result.get_ylabel(), "Predicted Target")
+        self.assertEqual(result.get_title(),"Actual vs. Predicted Target Values")
+
 
 if __name__ == "__main__":
     pytest.main()
