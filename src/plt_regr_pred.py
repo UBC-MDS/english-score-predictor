@@ -54,5 +54,6 @@ def plt_regr_pred(X, y, pipe_obj):
     # Add labels and show plot
     ax.set_xlabel("Actual Target")
     ax.set_ylabel("Predicted Target")
+    ax.set_title("Actual vs. Predicted Target Values")
     plt.show()
-    return ax
+    return fig, ax
