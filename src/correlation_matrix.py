@@ -35,6 +35,7 @@ def pearson_correlation_matrix(df, colormap='seismic'):
     >>> display(pearson_matrix)
     """
     # Select numeric columns without null values
+    df = df.dropna(axis=1)
     selected_features = df.select_dtypes(include='number').loc[
         :, df.select_dtypes(include='number').nunique() > 1
     ]
