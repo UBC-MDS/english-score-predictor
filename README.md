@@ -9,6 +9,13 @@ We utilized a subset of a dataset originally compiled from 680,333 participants,
 
 ---
 
+## Report
+
+The final report can be found
+[here](https://github.com/UBC-MDS/522-workflows-group-18/blob/53-replace-code-chunks-in-notebook-with-functions/notebooks/english_language_learning_ability_prediction_analysis.pdf).
+
+---
+
 ## 👥 Team Members
 
 - Salva

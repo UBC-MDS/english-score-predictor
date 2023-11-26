@@ -26,6 +26,7 @@ def fit_and_return_top_models(
     ----------
     search : RandomizedSearchCV or GridSearchCV
         A RandomizedSearchCV or GridSearchCV object.
+        This model will be fitted once this function is called.
     N : int
         The number of top models to return.
     X_train : pandas.DataFrame
