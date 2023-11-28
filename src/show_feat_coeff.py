@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def show_feat_coeff(pipe_obj, model_name, X):
+def show_feat_coeff(pipe_obj, model_name, preprocessor_obj):
     """
     Show the estimated feature coefficients for a learned regression model. 
 
@@ -16,10 +16,8 @@ def show_feat_coeff(pipe_obj, model_name, X):
         get coefficient values. 
     model_name : str
         The name of the regression model as per the Pipeline object named steps.
-    X : pandas.DataFrame (n_samples, n_features)
-        The input data frame containing the training data on which the input Pipeline object was fit.
-        The n_features dimension of the data frame will indicate the number of coefficient values to 
-        be returned corresponding to the column names for the n_features.
+    preprocessor_obj : ColumnTransformer
+        The name of the preprocessor (column transformer) as per the Pipeline object definition
 
     Returns:
     -------
@@ -31,14 +29,14 @@ def show_feat_coeff(pipe_obj, model_name, X):
     Examples:
     --------
     >>> import pandas as pd
-    >>> from sklearn.pipeline import Pipeline 
+    >>> from sklearn.pipeline import make_pipeline 
     >>> from sklearn.linear_model import Lasso, Ridge, LinearRegression
     >>> from sklearn.preprocessing import StandardScaler
-    # Replace StandardScaler with desired preprocessing step(s)
+    # Assume preprocessor is defined as necessary
     # Replace Lasso model with desired regression model (e.g. Ridge, LinearRegression)
-    >>> pipe = Pipeline([('stdsclr', StandardScaler()), ('lasso', Lasso())]) 
+    >>> pipe = make_pipeline(preprocessor, Lasso) 
     >>> pipe.fit(X_train, y_train)
-    >>> results_df = show_feat_coeff(pipe, 'lasso', X_train)
+    >>> results_df = show_feat_coeff(pipe, 'lasso', preprocessor)
     >>> results_df
     
     Notes:
@@ -48,7 +46,7 @@ def show_feat_coeff(pipe_obj, model_name, X):
     """
     # Access .coef_ attribute of regression model 
     coef_vals = pipe_obj.named_steps[model_name].coef_
-    coef_id = X.columns
+    coef_id = pd.Series(data=preprocessor_obj.get_feature_names_out()).apply(lambda x: x.split('__')[-1])
     # Report coefficient values and corresponding feature names in a DataFrame
     result = pd.DataFrame(
         data=coef_vals, index=coef_id, columns=["Coefficients"]
