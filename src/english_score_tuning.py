@@ -27,14 +27,17 @@ def main(verbose):
     """Runs the analysis of the English Score Tuning."""
 
     if verbose:
-        click.echo("Getting the preprocessor...")
-    preprocessor = get_preprocessor()
-
-    if verbose:
         click.echo("Getting the train and test data...")
     X_train, y_train = get_train_data()
     X_test, y_test = get_test_data()
-    coef_names = get_coef_names()
+
+    if verbose:
+        click.echo("Getting and fitting the preprocessor...")
+    preprocessor = get_preprocessor()
+    preprocessor.fit(X_train)
+
+    print(type(preprocessor))
+    print(preprocessor.get_feature_names_out())
 
     # Ridge Regression
     if verbose:
@@ -110,7 +113,7 @@ def main(verbose):
     best_pipe.fit(X_train, y_train)
 
     # Get the feature coefficient values
-    show_feat_coeff(best_pipe, "ridge", coef_names)
+    show_feat_coeff(best_pipe, "ridge", preprocessor)
 
     # plot actual vs predicted
     PredictionErrorDisplay.from_estimator(
@@ -145,29 +148,6 @@ def get_test_data():
     y_test = test_df["correct"]
 
     return X_test, y_test
-
-
-def get_coef_names():
-    """Returns the labels for the training data"""
-
-    return [
-        "age",
-        "Eng_start",
-        "Eng_country_yrs",
-        "Lived_Eng_per",
-        "Eng_little_bileng",
-        "Eng_little_little",
-        "Eng_little_lot",
-        "Eng_little_monoeng",
-        "speaker_cat_foreign",
-        "speaker_cat_late",
-        "speaker_cat_native",
-        "psychiatric",
-        "house_Eng",
-        "nat_Eng",
-        "prime_Eng",
-        "education",
-    ]
 
 
 def get_preprocessor():
