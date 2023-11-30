@@ -18,4 +18,5 @@ dependencies:
   - vegafusion-jupyter
   - vegafusion-python-embed
   - vl-convert-python[version='>=0.14.0']
+  - click
 prefix: /Users/farrandi/miniconda3/envs/522
