@@ -12,6 +12,7 @@ from sklearn.preprocessing import (
     FunctionTransformer,
     
 )
+import pickle
 from sklearn.impute import SimpleImputer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import Pipeline, make_pipeline
@@ -22,8 +23,11 @@ from plot_histogram_with_exclusions import plot_histogram_with_exclusions
 @click.command()
 @click.option('--training-data', type=str, help="Path to training data ex: data/raw/")
 @click.option('--plot-to', type=str, help="Path to where all plots should be written ex: results/figures/" )
+@click.option('--pickle-to', type=str, help="Path to where preprocessor should be written ex: results/models/preprocessor" )
 
-def main(training_data, plot_to):
+
+
+def main(training_data, plot_to, pickle_to):
     # Read the training data
     train_df = pd.read_csv(
         training_data, sep=",", on_bad_lines="skip", low_memory=False
@@ -134,12 +138,7 @@ def main(training_data, plot_to):
     categories_list = education_counts_greater_than_one.index.tolist()
 
 
-    # Define the custom function to map values to 'Other'
-    def map_to_other(df):
-        return (
-            df["education"].apply(
-                lambda x: x if x in categories_list else "Others")
-        ).to_frame()
+    
 
 
     # Defines the order for Education to be used in the OrdinalEncoder
@@ -172,6 +171,16 @@ def main(training_data, plot_to):
         (categorical_education_tranformer, categorical_education),
     )
 
+     # Save the preprocessor object using pickle
+    with open(pickle_to +'preprocessor.pkl', 'wb') as file:
+        pickle.dump(preprocessor, file)
+
+# Define the custom function to map values to 'Other'
+def map_to_other(df, categories_list):
+    return (
+        df["education"].apply(
+            lambda x: x if x in categories_list else "Others")
+    ).to_frame()
 
 if __name__ == '__main__':
     main()
