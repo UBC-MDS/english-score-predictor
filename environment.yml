@@ -1,4 +1,4 @@
-name: "522"
+name: base
 channels:
   - conda-forge
   - defaults
