@@ -322,7 +322,8 @@ def get_preprocessor():
 
     # Create a transformer using FunctionTransformer
     categorical_education_tranformer = make_pipeline(
-        FunctionTransformer(map_to_other), OrdinalEncoder(categories=[education_order])
+        FunctionTransformer(map_to_other, feature_names_out="one-to-one"),
+        OrdinalEncoder(categories=[education_order]),
     )
 
     return make_column_transformer(
