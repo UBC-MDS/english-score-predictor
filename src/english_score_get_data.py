@@ -10,13 +10,19 @@ src_dir = os.path.join(root_dir, 'src')                # Define the src director
 sys.path.append(src_dir)                               # Add src directory to the system path
 
 @click.command()
-@click.option("--url", required=True, type=str, help="URL of the dataset to download.")
+@click.option(
+    "--url", required=True,
+    default="https://osf.io/download/g72pq/",
+    type=str,
+    help="URL of the dataset to download.")
 @click.option(
     "--output_folder_path",
     required=True,
     type=str,
+    default="./data/raw",
     help="Path to the output folder where files will be saved.",
 )
+
 def main(url, output_folder_path, sample_size=0.3, test_size=0.3):
     """
     Downloads, samples, splits, and saves a dataset.
