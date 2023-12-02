@@ -23,21 +23,38 @@ SCORING = {"RMSE": "neg_root_mean_squared_error", "R squared": "r2"}
 
 @click.command()
 @click.option("--verbose", "-v", is_flag=True, help="Will print verbose messages.")
-def main(verbose):
+@click.option(
+    "--train",
+    default="data/raw/train_dataset.csv",
+    help="Path to the training data.",
+)
+@click.option(
+    "--test",
+    default="data/raw/test_dataset.csv",
+    help="Path to the test data.",
+)
+@click.option(
+    "--output_dir",
+    default="results/models/",
+    help="Output directory, default is `results/models/`",
+)
+def main(
+    verbose,
+    train,
+    test,
+    output_dir,
+):
     """Runs the analysis of the English Score Tuning."""
 
     if verbose:
         click.echo("Getting the train and test data...")
-    X_train, y_train = get_train_data()
-    X_test, y_test = get_test_data()
+    X_train, y_train = get_train_data(train)
+    X_test, y_test = get_test_data(test)
 
     if verbose:
         click.echo("Getting and fitting the preprocessor...")
     preprocessor = get_preprocessor()
     preprocessor.fit(X_train)
-
-    print(type(preprocessor))
-    print(preprocessor.get_feature_names_out())
 
     # Ridge Regression
     if verbose:
@@ -60,7 +77,7 @@ def main(verbose):
         refit="RMSE",
     )
 
-    fit_and_return_top_models(
+    ridge_top_models = fit_and_return_top_models(
         ridge_search,
         5,
         X_train,
@@ -72,6 +89,12 @@ def main(verbose):
         ],
         scoring="RMSE",
     )
+
+    # Saves the top models to a csv file
+    ridge_filename = output_dir + "ridge_top_models.csv"
+    if verbose:
+        click.echo(f"Saving the top models to f{ridge_filename}...")
+    ridge_top_models.to_csv(ridge_filename)
 
     # Lasso Regression
     if verbose:
@@ -91,7 +114,7 @@ def main(verbose):
         refit="RMSE",
     )
 
-    fit_and_return_top_models(
+    lasso_top_models = fit_and_return_top_models(
         lasso_search,
         5,
         X_train,
@@ -103,6 +126,12 @@ def main(verbose):
         ],
         scoring="RMSE",
     )
+
+    # Saves the top models to a csv file
+    lasso_filename = output_dir + "lasso_top_models.csv"
+    if verbose:
+        click.echo(f"Saving the top models to f{lasso_filename}...")
+    lasso_top_models.to_csv(lasso_filename)
 
     # Discussion Section
     if verbose:
@@ -124,26 +153,20 @@ def main(verbose):
         click.echo("Done!")
 
 
-def get_train_data():
+def get_train_data(train):
     """Returns the training data as a tuple of X_train and y_train"""
 
-    dataset = pd.read_csv(
-        "data/sampled_dataset.csv", sep=",", on_bad_lines="skip", low_memory=False
-    )
-    train_df, _ = train_test_split(dataset, test_size=0.3, random_state=123)
+    train_df = pd.read_csv(train, sep=",", on_bad_lines="skip", low_memory=False)
     X_train = train_df.drop(columns="correct")
     y_train = train_df["correct"]
 
     return X_train, y_train
 
 
-def get_test_data():
+def get_test_data(test):
     """Returns the test data as a tuple of X_test and y_test"""
 
-    dataset = pd.read_csv(
-        "data/sampled_dataset.csv", sep=",", on_bad_lines="skip", low_memory=False
-    )
-    _, test_df = train_test_split(dataset, test_size=0.3, random_state=123)
+    test_df = pd.read_csv(test, sep=",", on_bad_lines="skip", low_memory=False)
     X_test = test_df.drop(columns="correct")
     y_test = test_df["correct"]
 
