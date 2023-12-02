@@ -5,6 +5,7 @@ import sys
 import dataframe_image as dfi
 from show_feat_coeff import show_feat_coeff
 from sklearn.metrics import PredictionErrorDisplay
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 
 sys.path.append('src')
 
@@ -86,7 +87,13 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_p
     if verbose:
         click.echo("Getting Best Test Score...")
     # Get the test score of the best model
-    score = best_pipeline.score(X_test, y_test)
+    score = pd.DataFrame(
+        {
+            "r2" : best_pipeline.score(X_test, y_test),
+            "rmse" : (mean_squared_error(X_test, best_pipeline.predict(X_test)) ** 1/2),
+            "mape" : mean_absolute_percentage_error
+        }
+    )
     score.data.to_csv(tables_to + "test-score.csv")
 
     if verbose:
