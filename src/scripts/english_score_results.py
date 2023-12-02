@@ -44,6 +44,21 @@ sys.path.append('src')
 )
 
 def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_path):
+    '''
+        Main function for discussion and results of final model. 
+        Includes reporting test score, showing feature coefficients, and plotting actual vs. predicted values
+
+        Args:
+            verbose (str): flag to print verbose messages.
+            train (str): Path to the train data CSV file.
+            test (str): Path to the test data CSV file.
+            plot_to (str): Path to save the generated plots.
+            tables_to (str): Path to save the tables.
+            preprocessor_path (str): Path to preprocessor object.
+            pipeline_path (str): Path to pipeline object.
+    Returns:
+        None
+    '''
 
     if verbose:
         click.echo("Getting the train and test data...")
@@ -67,6 +82,12 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_p
     with open(pipeline_path, "rb") as f:
         best_pipeline = pickle.load(f)
     best_pipeline.fit(X_train, y_train)
+
+    if verbose:
+        click.echo("Getting Best Test Score...")
+    # Get the test score of the best model
+    score = best_pipeline.score(X_test, y_test)
+    score.data.to_csv(tables_to + "test-score.csv")
 
     if verbose:
         click.echo("Running the feature coefficient section...")
