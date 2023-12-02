@@ -4,6 +4,7 @@ channels:
   - defaults
 dependencies:
   - altair=5.1
+  - click
   - ipykernel=6.26
   - jupyter_contrib_nbextensions=0.7.0
   - jupyterlab-git=0.41
@@ -11,6 +12,7 @@ dependencies:
   - matplotlib=3.8
   - numpy=1.26
   - pandas=2.1
+  - pickleshare=0.7
   - python=3.11
   - scikit-learn=1.3
   - scipy=1.11
@@ -19,5 +21,8 @@ dependencies:
   - vegafusion-jupyter
   - vegafusion-python-embed
   - vl-convert-python[version='>=0.14.0']
-  - click
+  - pickleshare=0.7
+  - dataframe_image
+  - pip:
+      - dataframe-image==0.2.2
 prefix: /Users/farrandi/miniconda3/envs/522
