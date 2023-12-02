@@ -1,4 +1,5 @@
 import click
+import dataframe_image as dfi
 import pandas as pd
 import pickle
 import sys
@@ -99,6 +100,12 @@ def main(verbose, train, test, output_dir, preprocessor_path):
         click.echo(f"Saving the top models to {ridge_filename}")
     ridge_top_models.to_csv(ridge_filename)
 
+    # Saves the top models to a png file
+    ridge_image_filename = output_dir + "figures/ridge_top_models.png"
+    if verbose:
+        click.echo(f"Saving the top models (as png) to {ridge_image_filename}")
+    dfi.export(ridge_top_models, ridge_image_filename)
+
     # Saves the best model to a pickle file
     ridge_best_model = ridge_search.best_estimator_
     ridge_best_model_filename = output_dir + "models/ridge_best_model.pkl"
@@ -143,6 +150,12 @@ def main(verbose, train, test, output_dir, preprocessor_path):
     if verbose:
         click.echo(f"Saving the top models to {lasso_filename}")
     lasso_top_models.to_csv(lasso_filename)
+
+    # Saves the top models to a png file
+    lasso_image_filename = output_dir + "figures/lasso_top_models.png"
+    if verbose:
+        click.echo(f"Saving the top models (as png) to {lasso_image_filename}")
+    dfi.export(lasso_top_models, lasso_image_filename)
 
     # Saves the best model to a pickle file
     lasso_best_model = lasso_search.best_estimator_
