@@ -1,4 +1,5 @@
 import sys
+import os
 import pandas as pd
 import numpy as np
 import click
@@ -11,13 +12,17 @@ from sklearn.preprocessing import (
     StandardScaler,
     FunctionTransformer,
 )
+
 import pickle
 from sklearn.impute import SimpleImputer
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import Pipeline, make_pipeline
 
-from correlation_matrix import pearson_correlation_matrix
-from plot_histogram_with_exclusions import plot_histogram_with_exclusions
+
+sys.path.append('src')
+
+from helper.correlation_matrix import pearson_correlation_matrix
+from helper.plot_histogram_with_exclusions import plot_histogram_with_exclusions
 
 
 @click.command()
