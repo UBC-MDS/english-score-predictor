@@ -1,0 +1,10 @@
+title: "english language learning ability prediction analysis"
+author: "Salva, Atabak, Nando, Rachel"
+date: "2023-12-01"
+sphinx:
+  config:
+    bibtex_reference_style: author_year
+execute:
+  execute_notebooks: force 
+bibtex_bibfiles:
+    - references.bib
