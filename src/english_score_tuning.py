@@ -26,12 +26,12 @@ SCORING = {"RMSE": "neg_root_mean_squared_error", "R squared": "r2"}
 @click.option("--verbose", "-v", is_flag=True, help="Will print verbose messages.")
 @click.option(
     "--train",
-    default="data/raw/train_dataset.csv",
+    default="data/raw/train_data.csv",
     help="Path to the training data.",
 )
 @click.option(
     "--test",
-    default="data/raw/test_dataset.csv",
+    default="data/raw/test_data.csv",
     help="Path to the test data.",
 )
 @click.option(
