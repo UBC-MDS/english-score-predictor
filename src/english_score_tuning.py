@@ -94,7 +94,7 @@ def main(verbose, train, test, output_dir, preprocessor_path):
     # Saves the top models to a csv file
     ridge_filename = output_dir + "ridge_top_models.csv"
     if verbose:
-        click.echo(f"Saving the top models to f{ridge_filename}...")
+        click.echo(f"Saving the top models to {ridge_filename}...")
     ridge_top_models.to_csv(ridge_filename)
 
     # Lasso Regression
@@ -131,7 +131,7 @@ def main(verbose, train, test, output_dir, preprocessor_path):
     # Saves the top models to a csv file
     lasso_filename = output_dir + "lasso_top_models.csv"
     if verbose:
-        click.echo(f"Saving the top models to f{lasso_filename}...")
+        click.echo(f"Saving the top models to {lasso_filename}...")
     lasso_top_models.to_csv(lasso_filename)
 
     # Discussion Section
