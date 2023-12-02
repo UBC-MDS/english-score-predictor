@@ -16,8 +16,10 @@ from sklearn.model_selection import RandomizedSearchCV
 from scipy.stats import loguniform
 from sklearn.metrics import PredictionErrorDisplay
 from sklearn.model_selection import train_test_split
-from search_top_models import fit_and_return_top_models
-from show_feat_coeff import show_feat_coeff
+
+sys.path.append("src")
+from helper.search_top_models import fit_and_return_top_models
+from helper.show_feat_coeff import show_feat_coeff
 
 SCORING = {"RMSE": "neg_root_mean_squared_error", "R squared": "r2"}
 
