@@ -36,8 +36,8 @@ SCORING = {"RMSE": "neg_root_mean_squared_error", "R squared": "r2"}
 )
 @click.option(
     "--output_dir",
-    default="results/models/",
-    help="Output directory, default is `results/models/`",
+    default="results/",
+    help="Output directory, default is `results/`",
 )
 @click.option(
     "--preprocessor_path",
@@ -92,10 +92,18 @@ def main(verbose, train, test, output_dir, preprocessor_path):
     )
 
     # Saves the top models to a csv file
-    ridge_filename = output_dir + "ridge_top_models.csv"
+    ridge_filename = output_dir + "tables/ridge_top_models.csv"
     if verbose:
-        click.echo(f"Saving the top models to {ridge_filename}...")
+        click.echo(f"Saving the top models to {ridge_filename}")
     ridge_top_models.to_csv(ridge_filename)
+
+    # Saves the best model to a pickle file
+    ridge_best_model = ridge_search.best_estimator_
+    ridge_best_model_filename = output_dir + "models/ridge_best_model.pkl"
+    if verbose:
+        click.echo(f"Saving the best model to {ridge_best_model_filename}")
+    with open(ridge_best_model_filename, "wb") as f:
+        pickle.dump(ridge_best_model, f)
 
     # Lasso Regression
     if verbose:
@@ -129,26 +137,18 @@ def main(verbose, train, test, output_dir, preprocessor_path):
     )
 
     # Saves the top models to a csv file
-    lasso_filename = output_dir + "lasso_top_models.csv"
+    lasso_filename = output_dir + "tables/lasso_top_models.csv"
     if verbose:
-        click.echo(f"Saving the top models to {lasso_filename}...")
+        click.echo(f"Saving the top models to {lasso_filename}")
     lasso_top_models.to_csv(lasso_filename)
 
-    # Discussion Section
+    # Saves the best model to a pickle file
+    lasso_best_model = lasso_search.best_estimator_
+    lasso_best_model_filename = output_dir + "models/lasso_best_model.pkl"
     if verbose:
-        click.echo("Running the Discussion Section...")
-    best_pipe = make_pipeline(
-        preprocessor, Ridge(alpha=ridge_search.best_params_["ridge__alpha"])
-    )
-    best_pipe.fit(X_train, y_train)
-
-    # Get the feature coefficient values
-    show_feat_coeff(best_pipe, "ridge", preprocessor)
-
-    # plot actual vs predicted
-    PredictionErrorDisplay.from_estimator(
-        best_pipe, X_test, y_test, kind="actual_vs_predicted", subsample=None
-    ).plot()
+        click.echo(f"Saving the best model to {lasso_best_model_filename}")
+    with open(lasso_best_model_filename, "wb") as f:
+        pickle.dump(lasso_best_model, f)
 
     if verbose:
         click.echo("Done!")
