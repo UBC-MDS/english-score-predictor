@@ -1,8 +1,13 @@
+import sys
+import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import click
-import os
 
+# Add the src directory to the system path
+root_dir = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the script
+src_dir = os.path.join(root_dir, 'src')                # Define the src directory path
+sys.path.append(src_dir)                               # Add src directory to the system path
 
 @click.command()
 @click.option("--url", required=True, type=str, help="URL of the dataset to download.")
@@ -36,7 +41,7 @@ def main(url, output_folder_path, sample_size=0.3, test_size=0.3):
     """
 
     # Ensure the directory exists
-    directory = output_folder_path
+    directory = os.path.abspath(output_folder_path)
     if not os.path.exists(directory):
         os.makedirs(directory)
 
@@ -50,14 +55,14 @@ def main(url, output_folder_path, sample_size=0.3, test_size=0.3):
     )
 
     # Save the training and testing datasets
-    train_file_path = os.path.join(directory, "train_dataset.csv")
-    test_file_path = os.path.join(directory, "test_dataset.csv")
+    train_file_path = os.path.join(directory, "train_data.csv")
+    test_file_path = os.path.join(directory, "test_data.csv")
     train_df.to_csv(train_file_path, index=False)
     test_df.to_csv(test_file_path, index=False)
 
     # Save the sampled dataset directly to a ZIP file
-    zip_file_path = os.path.join(directory, "sampled_dataset.zip")
-    compression_opts = dict(method="zip", archive_name="sampled_dataset.csv")
+    zip_file_path = os.path.join(directory, "sampled_data.zip")
+    compression_opts = dict(method="zip", archive_name="sampled_data.csv")
     sampled_dataset.to_csv(zip_file_path, index=False, compression=compression_opts)
 
 
