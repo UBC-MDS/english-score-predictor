@@ -84,21 +84,14 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     if verbose:
         click.echo("Getting Best Test Score...")
     # Get the test score of the best model
-    score = pd.DataFrame(
-        {
-            "r2" : best_model.score(X_test, y_test),
-            "rmse" : (mean_squared_error(X_test, best_model.predict(X_test)) ** 1/2),
-            "mape" : mean_absolute_percentage_error(X_test, best_model.predict(X_test))
-        }
-    )
-    score.data.to_csv(tables_to + "test-score.csv")
+    score = pd.DataFrame([best_model.score(X_test, y_test)], columns=["r2"])
+    score.to_csv(tables_to + "test-score.csv")
 
     if verbose:
         click.echo("Running the feature coefficient section...")
     # Get the feature coefficient values
     sfc = show_feat_coeff(best_model, "ridge", preprocessor)
     dfi.export(sfc, plot_to + "feat-coefs.png")
-    sfc.data.to_csv(tables_to + "feat-coefs.csv")
         
     if verbose:
         click.echo("Plotting the actual vs predicted...")
@@ -106,7 +99,8 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     ped = PredictionErrorDisplay.from_estimator(
         best_model, X_test, y_test, kind="actual_vs_predicted", subsample=None
     ).plot()
-    dfi.export(ped, plot_to + "act-vs-pred.png")
+    figure = ped.figure_
+    figure.savefig(plot_to + "act-vs-pred.png")
 
     if verbose:
         click.echo("Done!")
