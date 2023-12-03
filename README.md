@@ -12,7 +12,7 @@ We utilized a subset of a dataset originally compiled from 680,333 participants,
 ## Report
 
 The final report can be found
-[here](https://github.com/UBC-MDS/522-workflows-group-18/docs/english_language_learning_ability_prediction_analysis.html)
+[here](https://ubc-mds.github.io/522-workflows-group-18/docs/english_language_learning_ability_prediction_analysis.html)
 
 ---
 
