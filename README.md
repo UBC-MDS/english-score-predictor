@@ -16,84 +16,99 @@ The final report can be found
 
 ---
 
-## 👥 Team Members
-
-- Salva
-- Atabak
-- Nando
-- Rachel
-
----
-
 ## 💻 Getting Started
 
-### Dependencies
+### ⚙️ Initial Setup
 
-- Ensure you have `conda` installed as we use a conda environment to manage our project dependencies.
-- Python and packages listed in [environment.yml]
-
-### Installing
-
-- Clone the repository:
+1. Clone the repository and navigate to the project root
 
 ```bash
-git clone [https://github.com/UBC-MDS/522-workflows-group-18]
+git clone
 cd 522-workflows-group-18
 ```
 
-#### Running the code locally with conda environment
+2. Make sure Docker is installed and launched on your machine.
 
-- Create and activate the conda environment:
+### 🛠️ Setting up your environment (conda or Docker)
+
+#### Method 1: Running the code via conda environment
+
+1. Create and activate the conda environment:
 
 ```bash
 conda env create -f environment.yml
 conda activate 522
 ```
 
-- Launch Jupyter Notebook:
+2. Launch Jupyter Notebook:
 
 ```bash
 jupyter lab
 ```
 
-#### Running the code via Docker container
+_Note_: If you want to close the environment, press `ctrl + c` or `cmd + c` in the terminal to exit Jupyter Notebook and run the following command to deactivate the environment:
+
+```bash
+conda deactivate 522
+```
+
+#### Method 2: Running the code via Docker container
+
+1. Go to the project root and run the following command:
 
 ```bash
 docker compose up # add -d flag to run in detached mode
 ```
 
-- Open the link shown in the terminal to access Jupyter Notebook.
+2. Click the link in the terminal to launch Jupyter Notebook. It should look something like this: `http://127.0.0.1:8888/lab`
 
-- to close the container:
+_Note_: when you want toto close the container, press `ctrl + c` or `cmd + c` in the terminal and run the following command:
 
 ```bash
 docker compose down
 ```
 
----
+### 🖥️ Viewing the report
 
-## 🚀 Usage
+1. Make sure you have done the steps in the previous section and are in the jupyter lab UI (either via the `jupyter lab` command from the conda environment or via the link in the terminal when you run `docker compose up`)
 
-To dive into our analysis:
+2. Navigate to `notebooks/english_language_learning_ability_prediction_analysis.ipynb` to view our data analysis process, model training, and predictions.
 
-1. Launch Jupyter Notebook:
+3. Feel free to click `Restart Kernel and Run All Cells` to re-run the analysis.
+
+### 🏃 Running the analysis
+
+**Note:** Currently this functionality only works via the conda environment.
+
+1. Make sure you followed Method 1 in the **Setting up your environment** section.
+
+2. Navigate to the project root and run the following command.
+
+These are the simple commands with all the default values to run the analysis
 
 ```bash
-jupyter notebook English Language Learning Ability Prediction.ipynb
+# Get train/test data:
+python src/scripts/english_score_get_data.py
+
+# Perform EDA:
+python src/scripts/english_score_eda.py -v
+
+# Tune Models:
+python src/scripts/english_score_tuning.py -v
+
+# Get Optimal Model Results:
+python src/scripts/english_score_results.py -v
 ```
 
-2. Navigate through the notebook to view our data analysis process, model training, and predictions.
+or you can run the following commands to customize the analysis:
 
-3. To run the analysis,
-enter the following commands in the terminal in the project root:
-
-```
+```bash
 # Get train/test data:
 python src/scripts/english_score_get_data.py\
    --url="https://osf.io/download/g72pq/" \
    --output_folder_path="./data/raw"
 
-# Perform EDA: 
+# Perform EDA:
 python src/scripts/english_score_eda.py -v \
    --training-data="data/raw/train_data.csv" \
    --plot-to="results/figures/" \
@@ -137,6 +152,15 @@ We employ a comprehensive approach:
 ## 📈 Results and Discussion
 
 Our analysis, based on a dataset of approximately 200,000 individuals, shows that factors such as age, education, and language background significantly predict English proficiency. The regression model achieved a 5.3% RMSE on test data, confirming the reliability of these predictors in assessing language skills. Notably, being a native English speaker emerged as the strongest positive predictor, while immersion in English learning showed a strong negative correlation. These findings reinforce that demographic and educational backgrounds are crucial in language acquisition. This opens avenues for future research, particularly in understanding how cultural exposure influences language proficiency, potentially leading to more effective and personalized language learning strategies.
+
+---
+
+## 👥 Team Members
+
+- Salva
+- Atabak
+- Nando
+- Rachel
 
 ---
 
