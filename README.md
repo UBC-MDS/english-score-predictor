@@ -84,6 +84,27 @@ jupyter notebook English Language Learning Ability Prediction.ipynb
 
 2. Navigate through the notebook to view our data analysis process, model training, and predictions.
 
+3. To run the analysis,
+enter the following commands in the terminal in the project root:
+
+```
+# Get train/test data:
+python src/scripts/english_score_get_data.py
+
+# Perform EDA: 
+python src/scripts/english_score_eda.py -v
+
+# Tune Models:
+python src/scripts/english_score_tuning.py -v
+
+# Get Optimal Model Results:
+python src/scripts/english_score_results.py -v
+
+# Build HTML report and copy build to docs folder
+jupyter-book build notebooks
+cp -r notebooks/_build/html/ docs
+
+
 ---
 
 ## 🔍 Methodology
