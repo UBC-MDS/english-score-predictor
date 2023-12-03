@@ -1,5 +1,6 @@
 services:
-  analysis-env:
+  analysis-nb-server:
+    # image: farrandi/522-workflows-group-18
     build:
       context: .
       dockerfile: Dockerfile
@@ -7,5 +8,4 @@ services:
       - "8888:8888"
     volumes:
       - .:/home/jovyan/work
-    environment:
-      PASSWORD: password
+    platform: linux/amd64
