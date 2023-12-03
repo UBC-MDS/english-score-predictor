@@ -6,6 +6,7 @@ dependencies:
   - altair=5.1
   - click
   - ipykernel=6.26
+  - jupyter_contrib_nbextensions=0.7.0
   - jupyterlab-git=0.41
   - jupyterlab=4.0
   - matplotlib=3.8
