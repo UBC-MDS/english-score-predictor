@@ -60,7 +60,11 @@ conda deactivate 522
 docker compose up # add -d flag to run in detached mode
 ```
 
+_Link to Docker Hub image:_ [farrandi/522-workflows-group-18](https://hub.docker.com/r/farrandi/522-workflows-group-18)
+
 2. Click the link in the terminal to launch Jupyter Notebook. It should look something like this: `http://127.0.0.1:8888/lab`
+
+3. Navigate to the analysis notebook at `work/notebooks/english_language_learning_ability_prediction_analysis.ipynb`
 
 _Note_: when you want toto close the container, press `ctrl + c` or `cmd + c` in the terminal and run the following command:
 

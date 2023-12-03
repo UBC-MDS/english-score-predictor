@@ -1,9 +1,9 @@
 services:
   analysis-nb-server:
-    # image: farrandi/522-workflows-group-18
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: farrandi/522-workflows-group-18:main
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     ports:
       - "8888:8888"
     volumes:
