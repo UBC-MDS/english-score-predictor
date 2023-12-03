@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>English Language Learning Ability Prediction Model &#8212; english language learning ability prediction analysis</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'english_language_learning_ability_prediction_analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">english language learning ability prediction analysis</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    English Language Learning Ability Prediction Model
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/english_language_learning_ability_prediction_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>English Language Learning Ability Prediction Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-and-results">Methods and Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-columns">Types of Columns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix">Correlation matrix</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-results">Modeling &amp; Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression-model">Ridge Regression Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression-model">Lasso Regression Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model Selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="english-language-learning-ability-prediction-model">
+<h1>English Language Learning Ability Prediction Model<a class="headerlink" href="#english-language-learning-ability-prediction-model" title="Permalink to this heading">#</a></h1>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/correlation-matrix.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;correct_age_correlation&quot;</span><span class="p">,</span> <span class="n">correlation_matrix_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;correct&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;correct_Eng_start_correlation&quot;</span><span class="p">,</span> <span class="n">correlation_matrix_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Eng_start&#39;</span><span class="p">,</span><span class="s1">&#39;correct&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ridge_scores_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/ridge_top_models.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge-best-alpha_cv&quot;</span><span class="p">,</span> <span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;param_ridge__alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge-best-error-cv&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_RMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge-best-error-percentage-cv&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_RMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge-best-score-cv&quot;</span><span class="p">,</span> <span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_R squared&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge-best-score-percentage-cv&quot;</span><span class="p">,</span> <span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_R squared&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_scores_df</span> <span class="o">=</span> <span class="n">ridge_scores_df</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">()</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;ridge_cv_df&quot;</span><span class="p">,</span> <span class="n">ridge_scores_df</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">lasso_scores_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/lasso_top_models.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;lasso-best-alpha_cv&quot;</span><span class="p">,</span> <span class="n">lasso_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;param_lasso__alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;lasso-best-error-cv&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">lasso_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_RMSE&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;lasso-best-score-cv&quot;</span><span class="p">,</span> <span class="n">lasso_scores_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;mean_test_R squared&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lasso_scores_df</span> <span class="o">=</span> <span class="n">lasso_scores_df</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">()</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;lasso_cv_df&quot;</span><span class="p">,</span> <span class="n">lasso_scores_df</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">best_test_score_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/test-score.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_r2&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_r2_percentage&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>In this report we attempt to build a prediction model using linear regression models to predict an individual’s English Proficiency Score based on factors such as age, education, and language background. Our final regression model used Ridge linear regression trained wth L2 regularization and was found to have an optimal alpha value of <span class="pasted-text">1.546352</span>. The performance of our model was scored across two metrics - R-squared score and Root Mean Squared Error (RMSE). Our model had a R-squared value of , indicating that % of the variance in the correct English Proficiency Score is associated with the features in our model and our RMSE of  suggested that, on average, our predictions have an error of %. We analyzed the learned coefficients to determine the most. Looking at our predicted scores and the associated true English Proficiency Scores, we observed that our model performed better for higher actual English Proficiency Scores. This prediction could therefore be used in an informal setting for screening of proficiency based on certain factors - where the predicted score its just used as a baseline. The model may be useful in the initial analysis of individuals wanting to learn English - for example as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. We also interpreted the learned coefficients for our model which found that the most important features in our dataset associated with English Proficiency Scores is the <code class="docutils literal notranslate"><span class="pre">Eng_little</span></code> encoding which indicates the individual’s current level of English (e.g., native, immersion learner, non-immersion learner).</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<section id="background">
+<h3>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h3>
+<p>In an increasingly interconnected world, the mastery of English language skills has ascended to critical importance. English frequently functions as the common medium of exchange in global commerce, education, and cross-border dialogue. This surge in demand has spurred extensive research into understanding the factors that contribute to successful English language learning. Various studies have explored a range of determinants, including age, educational background, language exposure, and the presence of learning disabilities like dyslexia.</p>
+<p>The concept of a critical period for language acquisition, a time during which learning a language is considerably easier and more effective, has been a focal point of debate and investigation. Research in this domain often leverages extensive datasets to analyze these factors and predict language learning outcomes, providing valuable insights for educators and learners alike.</p>
+<p>The dataset used in this study offers a rich collection of data points encompassing various demographic and linguistic variables. It includes information on native languages, the age of English language learning initiation, years spent in English-speaking environments, and the presence of psychiatric disorders or reading difficulties. This comprehensive dataset facilitates a nuanced exploration of how these diverse factors interplay to influence English language proficiency.</p>
+<p>By employing machine learning techniques and statistical analysis, this project aims to predict an individual’s proficiency in English, contributing to the broader understanding of language acquisition and offering practical applications in educational settings.</p>
+</section>
+<section id="research-question">
+<h3>Research Question<a class="headerlink" href="#research-question" title="Permalink to this heading">#</a></h3>
+<p>Can we predict an individual’s English proficiency score based on factors such as age, education, and language background?</p>
+</section>
+<section id="dataset">
+<h3>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h3>
+<p>The dataset <span id="id1">[<a class="reference internal" href="#id7" title="J. Hartshorne. Data: a critical period for second language acquisition: evidence from 2/3 million english speakers. https://osf.io/pyb8s/wiki/home/, September 2020. Dataset.">Hartshorne, 2020</a>]</span> is associated with the study “A Critical Period for Second Language Acquisition: Evidence from 2/3 Million English Speakers,” authored by Joshua Hartshorne, Joshua Tenenbaum, and Steven Pinker <span id="id2">[<a class="reference internal" href="#id8" title="J. K. Hartshorne, J. B. Tenenbaum, and S. Pinker. A critical period for second language acquisition: evidence from 2/3 million english speakers. Cognition, 177:263–277, 2018. doi:10.1016/j.cognition.2018.04.007.">Hartshorne <em>et al.</em>, 2018</a>]</span>. It includes demographic variables, language exposure details, and responses to critical questions. The dataset encompasses a wide range of languages, educational backgrounds, and living environments and the analysis primarily focuses on monolinguals, immersion learners, and non-immersion learners, providing valuable insights for language acquisition.</p>
+<p>This dataset is publicly available and consists of a substantial collection of data points, totaling 671.5MB in size. The repository includes several key components:</p>
+<ol class="arabic simple">
+<li><p><strong>Compiled.csv</strong>: This file contains the raw data, including subjects and items that were later excluded from the analysis.</p></li>
+<li><p><strong>Data.csv</strong>: This file features only the subjects and items that were analyzed in the study.</p></li>
+<li><p><strong>Processing.R</strong>: An R script included in the repository is used for converting data from the compiled.csv file into the format present in the data.csv file.</p></li>
+</ol>
+<p>The dataset covers a range of variables, such as:</p>
+<ul class="simple">
+<li><p><strong>Basic Information</strong>: Unique subject ID, date and time at the start of the experiment, gender, and age.</p></li>
+<li><p><strong>Language Details</strong>: Native languages (natlangs), primary language currently used (primelangs), and age at which English learning started (Eng_start).</p></li>
+<li><p><strong>Living and Education Background</strong>: Years living in English-speaking countries, living with native English speakers, highest level of education, and countries lived in.</p></li>
+<li><p><strong>Psychiatric and Reading Difficulties</strong>: Reports of any psychiatric disorders and difficulties with reading (dyslexia).</p></li>
+<li><p><strong>Experiment-specific Information</strong>: Use of a dictionary in the experiment, prior participation in the experiment, and percentage of critical items answered correctly.</p></li>
+</ul>
+<p>Additionally, there are columns for responses to individual questions in the experiment. We will explore the dataset in detail below.
+Note: Due to this analysis being conducted in the context of the Milestones, we limited the analysis to 200,000 rows to ensure that the analysis would run quickly and to ensure that do not exceed the 100MB limit for simplicity. We selected the rows through random sampling (the script used can be found as <code class="docutils literal notranslate"><span class="pre">notebooks/random_sampling_from_full_dataset.ipynb</span></code>).</p>
+</section>
+</section>
+<section id="methods-and-results">
+<h2>Methods and Results<a class="headerlink" href="#methods-and-results" title="Permalink to this heading">#</a></h2>
+<p>In order to address our research question, we will first select the appropriate features from our dataset by way of EDA and by referring to the data dictionary to better understand the instances in the dataset ( dataset information is linked in references). Additionally, since this will be a linear regression modelling problem, we will use the <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> and <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> Model as our models of choice, we will assess their ability by using the <span class="math notranslate nohighlight">\(R^2\)</span> and negative Root Mean Squared Error to ensure we use two different types of metrics to assess the variability in the predictions from the actual target.</p>
+<p>The initial steps involved extensive data preprocessing, which included handling missing values, standardizing numerical features, and encoding categorical variables. To enhance model interpretability, we categorized education levels into major groups, consolidating less frequent categories as “Others.”</p>
+<p>We constructed a column transformer, tailored to the nature of each feature type, incorporating standard scaling for numeric attributes, one-hot encoding for categorical variables, and specific treatments for binary features. Further, a custom function was used to map less frequent education categories to an “Others” label.</p>
+<p>The Ridge model, chosen as the optimal one, underwent hyperparameter tuning via randomized search. The performance was assessed using (negative) Root Mean Squared Error (neg-RMSE) and R-squared metrics, providing valuable insights into model accuracy and fit. The Ridge model showcased promising results, demonstrating its proficiency in predicting English proficiency scores.
+To ensure the model’s robustness, we validated its performance on a separate test dataset, affirming its effectiveness in predicting English proficiency scores. The final model, with an optimized alpha value of <span class="pasted-text">1.546</span>, yielded a test RMSE of <span class="pasted-text">0.053178</span>, suggesting a % average prediction error.</p>
+<section id="eda">
+<h3>EDA<a class="headerlink" href="#eda" title="Permalink to this heading">#</a></h3>
+<section id="types-of-columns">
+<h4>Types of Columns<a class="headerlink" href="#types-of-columns" title="Permalink to this heading">#</a></h4>
+<p>Our EDA is not included in this report but the script can be found under <code class="docutils literal notranslate"><span class="pre">src/scripts/english_score_eda.py</span></code>. Note that the EDA script was used to output the correlation matrix as shown below (<a class="reference internal" href="#feat-correlation-matrix"><span class="std std-numref">Fig. 1</span></a>) and additional figures used to inform our EDA output can be found under <code class="docutils literal notranslate"><span class="pre">results/figures/</span></code> (<code class="docutils literal notranslate"><span class="pre">education-level-fig.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-categoric-figs.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-numeric-figs.png</span></code>).</p>
+<p>Columns that can safely be dropped after looking at the distributions and looking at the data dictionary:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Elogit</span></code>: is the exponential log of the <code class="docutils literal notranslate"><span class="pre">correct</span></code> column (since we would like to predict the <code class="docutils literal notranslate"><span class="pre">correct</span></code> score itself as our target, we can omit this tranfromatoin of the target variable from our analysis);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dyslexia</span></code>: EDA shows that all participants in the training set were not dyslexic hence there will not be any features that the model can learn and will be omitted since all values are 0;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dictionary</span></code>: as with <code class="docutils literal notranslate"><span class="pre">Dyslexia</span></code>, since none of the participants in the training set used a dictionary, we can safely omit this from our dataset;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Natlangs</span></code>: the native langugages column has a corresponding binary column which is called nat_Eng, which is a yes no column instead of the specific languages the native speakers speak. Therefore, we chose to omit this and go with the simple binary feature since we are interested in the English speaking ability and whether a participant had prior experience/nativity;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Primelangs</span></code>: as with <code class="docutils literal notranslate"><span class="pre">Natlangs</span></code> column, we will opt for the binary column representation in the dataset;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Already_participated</span></code>: all values in the training set are 0 hence can be safely dropped and this feature is not of interest;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gender</span></code>: dropped in order to avoid gender bias;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: this feature represents the original country where the person is from. This information is indirectly captured in the native or primary column and since we care whether the participant is from mainly English speaking vs non-English speaking we will exclude specific countries by type but keep the country column;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UK_region</span></code>, <code class="docutils literal notranslate"><span class="pre">US_region</span></code>: we remove the region specific information to limit the research in terms of caring whether the participant spent years in an english speaking country regardless of which country it was. We will not consider whether a person lived in ireland or UK as long as it is english speaking so we will use columns like <code class="docutils literal notranslate"><span class="pre">Eng_years</span></code> as opposed to <code class="docutils literal notranslate"><span class="pre">UK_region</span></code> or <code class="docutils literal notranslate"><span class="pre">US_region</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">currcountry</span></code>: this column represents the current country the participant lives in. To limit the study and reduce dimensionality we will exclude this column (since we have other features that capture the time spent by a participant in English Speaking countries which we are more interested in). For example a native speaker who currently lives in South Africa still speaks english very well and we capture those details about them by <code class="docutils literal notranslate"><span class="pre">Eng_years</span></code> as opposed to where the person currently lives;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ebonics</span></code>: was excluded for the Milestone analysis due to having additional nuances that would need to be handled;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: since we are interested in how students perform, we do not need to consider at what time or date they took their tests. Hence, we will drop the first 4 columns of the dataset;</p></li>
+<li><p>Other additional columns like <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">unnamed:0</span></code>, <code class="docutils literal notranslate"><span class="pre">q_1</span></code>, etc.:</p>
+<ul>
+<li><p>These columns do not provide meaning in the context of our analysis and will not be used whatsoever in our dataset. We are choosing to drop those columns early on before we visualise our data and examine it for the modelling phase that will follow.</p></li>
+</ul>
+</li>
+</ul>
+<p>Also note that EDA on the training data revealed that the majority of the education levels are the 7 large categories. Therefore, all additional education levels in the other categories which have a value of 1 will be labelled as “Others” to avoid adding major dimensionality to our dataset and we will focus the major education level groupings.</p>
+</section>
+<section id="correlation-matrix">
+<h4>Correlation matrix<a class="headerlink" href="#correlation-matrix" title="Permalink to this heading">#</a></h4>
+<figure class="align-default" id="feat-correlation-matrix">
+<a class="reference internal image-reference" href="_images/feat-correlation-matrix.png"><img alt="_images/feat-correlation-matrix.png" src="_images/feat-correlation-matrix.png" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Correlation matrix for columns not dropped as mentioned above.</span><a class="headerlink" href="#feat-correlation-matrix" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>There are strong negative correlations between English language-related variables <code class="docutils literal notranslate"><span class="pre">Eng_start</span></code>, <code class="docutils literal notranslate"><span class="pre">Eng_country_yrs</span></code>, <code class="docutils literal notranslate"><span class="pre">Lived_Eng_per</span></code>,<code class="docutils literal notranslate"><span class="pre">house_Eng</span></code>,<code class="docutils literal notranslate"><span class="pre">nat_Eng</span></code>,<code class="docutils literal notranslate"><span class="pre">prime_Eng</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">correct</span></code>(our target) has a moderate positive correlation (<span class="pasted-text">0.103</span>) with <code class="docutils literal notranslate"><span class="pre">age</span></code> indicating a slight positive relationship. However, this correlation is relatively weak. Additionally, correct has a strong negative correlation (<span class="pasted-text">-0.440</span>) with <code class="docutils literal notranslate"><span class="pre">Eng_start</span></code>. This suggests that as the English proficiency at the start decreases, the likelihood of correctness increases.</p>
+<p>It’s important to note that correlation does not imply causation.</p>
+</section>
+</section>
+<section id="modeling-results">
+<h3>Modeling &amp; Results<a class="headerlink" href="#modeling-results" title="Permalink to this heading">#</a></h3>
+<p>As discussed in the Methods summary, we will now build and test our Ridge Regression and Lasso Models</p>
+<section id="ridge-regression-model">
+<h4>Ridge Regression Model<a class="headerlink" href="#ridge-regression-model" title="Permalink to this heading">#</a></h4>
+<p>In this section we will be using the Ridge Regression model to predict the English Proficiency Score of a participant based on the features we have selected in the previous section.</p>
+<p>Ridge regression is a linear regression model that uses L2 regularization <span id="id3">[<a class="reference internal" href="#id10" title="Wessel N. van Wieringen. Lecture notes on ridge regression. https://arxiv.org/pdf/1509.09169.pdf, June 2023.">van Wieringen, 2023</a>]</span>. This means that the model penalizes the sum of squared coefficients <span id="id4">[<a class="reference internal" href="#id11" title="Deepika Singh. Linear, lasso, and ridge regression with r. https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r, November 2019.">Singh, 2019</a>]</span>.</p>
+<p>We will use the RMSE for our metric of choice to evaluate the performance of our model. This is because it would give us the same units as our target variable and would be easier to interpret. We considered using MAPE as well but since we have some values that are 0 in our target variable, we would have to drop those values and we would lose some information. We also included the R squared (the score that sklearn uses by default when you call score) in our CV results to have another, maybe more intuitive, way of assessing our model performance. Note that we set <code class="docutils literal notranslate"><span class="pre">refit='RMSE'</span></code> so that our best model that is returned has an alpha value that has the best cross-validated RMSE score.</p>
+<p>The cell below shows the top 5 alpha values and their corresponding scores (<a class="reference internal" href="#ridge-best-model-fig"><span class="std std-numref">Fig. 2</span></a>).</p>
+<figure class="align-default" id="ridge-best-model-fig">
+<a class="reference internal image-reference" href="../results/figures/ridge_best_model.png"><img alt="../results/figures/ridge_best_model.png" src="../results/figures/ridge_best_model.png" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Ridge model</span><a class="headerlink" href="#ridge-best-model-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We find out that the optimal <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value for ridge is <span class="pasted-text">1.546352</span>. This corresponds to a CV RMSE of <span class="pasted-text">0.053178</span> - maximizing the <span class="math notranslate nohighlight">\(R^2\)</span> CV score to <span class="pasted-text">0.240958</span>.</p>
+</section>
+<section id="lasso-regression-model">
+<h4>Lasso Regression Model<a class="headerlink" href="#lasso-regression-model" title="Permalink to this heading">#</a></h4>
+<p>The next model that we created is a Lasso Regression model. Lasso stands for Least Absolute Shrinkage and Selection Operator and differs from Ridge Regression in that Lasso allows for feature reduction (i.e. the coefficients can be zero whereas Ridge never sets the coefficient to be zero) <span id="id5">[<a class="reference internal" href="#id9" title="H. L. Li and M. Practitioner’s guide to data science. 10.2 lasso. https://scientistcafe.com/ids/lasso, April 2023.">Li and M., 2023</a>]</span>. Like Ridge, Lasso is a linear regression model, but uses L1 regularization - penalizing the sum of the absolute values of the coefficients. Similar to the Ridge Regression modeling above, we performed 10-fold cross-validation using RMSE as our primary scoring metric.</p>
+<p>Below are the results of our randomized hyperparameter search for the top 5 alpha values and the corresponding RMSE scores and fit times ({numref}lasso_best_model-fig).</p>
+<figure class="align-default" id="lasso-best-model-fig">
+<a class="reference internal image-reference" href="../results/figures/lasso_best_model.png"><img alt="../results/figures/lasso_best_model.png" src="../results/figures/lasso_best_model.png" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Lasso model</span><a class="headerlink" href="#lasso-best-model-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>For our optimal model with an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value of <span class="pasted-text">0.002281</span>, we got a CV RMSE of <span class="pasted-text">0.054164</span>. Like Ridge, we note again that this alpha value is optimal for both RMSE and <span class="math notranslate nohighlight">\(R^2\)</span> - maximizing the <span class="math notranslate nohighlight">\(R^2\)</span> CV score to <span class="pasted-text">0.212556</span>.</p>
+</section>
+<section id="model-selection">
+<h4>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this heading">#</a></h4>
+<p>The CV RMSE and test score results from the Ridge and Lasso models detailed above are very similar, however the optimal Ridge model performs marginally better (with roughly a <span class="pasted-text">5.31779880575366</span>% RMSE on the training data). Then, scoring the optimal Ridge model on our test data, we get an R-squared score of . We also see that the model is not overfitting since the CV and test scores are very close to each other (both rounding to %). Therefore, our optimal model is the <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> linear model trained with L2 regularization and an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value of <span class="pasted-text">1.546352</span>.</p>
+</section>
+</section>
+</section>
+<section id="discussion">
+<h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this heading">#</a></h2>
+<p>Looking at our optimal model, we are able to look at the learned coefficients for the model features. We interpret our results in that increasing features with positive coefficients is associated with an increased <code class="docutils literal notranslate"><span class="pre">correct</span></code> test score, whereas an increase in the features with negative coefficients is associated with decreasing <code class="docutils literal notranslate"><span class="pre">correct</span></code> test scores.</p>
+<figure class="align-default" id="feat-coefs">
+<a class="reference internal image-reference" href="_images/feat-coefs.png"><img alt="_images/feat-coefs.png" src="_images/feat-coefs.png" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Learned feature coefficients from fitting optimal Ridge model on training data.</span><a class="headerlink" href="#feat-coefs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>From the results above ({numref}feat-coefs), we can see that the most important features in determining a high English Proficiency Score are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_monoeng</span></code>: This is a binary column that indicates whether the participant is a native speaker of English or not. This is the most important feature associated with increasing the English Proficiency Score.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_bileng</span></code>: This is a binary column that indicates whether the participant is native speaker of English plus at least one other language. This is the second most important feature associated with increasing the English Proficiency Score.</p></li>
+</ul>
+<p>This shows that the most important feature in increasing the English Proficiency Score among this dataset is whether the participant is a native speaker of English or not. This is followed by whether the participant is a native speaker in both English and at least one other language - both of which make sense logically.</p>
+<p>The most important features in lowering the English Proficiency Score are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_lot</span></code>: This is a binary column that indicates whether the participant is an immersion learner.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">psychiatric</span></code>: This is a binary column that indicates whether the participant has any psychiatric disorders.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_little</span></code>: This is a binary column that indicates whether the participant is a non-immersion learner.</p></li>
+</ul>
+<p>This somewhat makes sense since the most important features in determining the test scores is the Eng_little encoding. If the person is a native speaker or a native speaker of English and at least one other language, they would have a higher test score. If the person is an immersion learner or a non-immersion learner, they would have a lower test score.</p>
+<p>We measured the performance of our model on the test data with our RMSE test score of <span class="pasted-text">0.0532</span> (<span class="pasted-text">5.32</span>%). Our model performed well on the test data - which we can further visualize by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values. From these numbers, we can make a couple general notes on our model performance. Our <span class="math notranslate nohighlight">\(R^2\)</span> value of  means that % of the variance in the <code class="docutils literal notranslate"><span class="pre">correct</span></code> English Proficiency Score is associated with the features (as illustrated in our coefficient table above) in our model. Additionally, our RMSE of <span class="pasted-text">0.0532</span> suggests that, on average, our predictions have an error of <span class="pasted-text">5.32</span>%. We can further visualize the deviation of our predictions from the actual test scores by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values.</p>
+<figure class="align-default" id="act-vs-pred">
+<a class="reference internal image-reference" href="_images/act-vs-pred.png"><img alt="_images/act-vs-pred.png" src="_images/act-vs-pred.png" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Scatter plot visualization of the prediction error showing the actual English Proficiency Scores vs. the predicted English profciency scores using our optimal model.</span><a class="headerlink" href="#act-vs-pred" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The scatterplot above ({numref}act-vs-pred) plots our predicted English Proficiency Scores from our Ridge model against the actual English Proficiency Scores. The dashed black line represents the “perfect” prediction where the predicted is equal to the actual score. We see that the majority of the examples are clustered in the upper right quadrant of the plot and appear to be closer to the diagonal line, veering further above the diagonal as the actual score value decreases. This indicates that the predicted scores are more accurate for the higher actual scores, and we tend to predict higher scores as the value of the actual score decreases. We can note from the plot above that our model appears to better predict higher English Proficiency Scores - varying significantly from the actual score for lower English Proficiency Scores.</p>
+<p>Considering the limitations noted above, our model may be useful in the initial analysis of individuals wanting to learn English as a second language to make an informal prediction on an estimated level of English Proficiency. This estimated English Proficiency Score could be used as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. This work could be further explored with a more in depth look at the feature importance and the correlation between specific features in the dataset and how they are associated with test scores. This could also be improved with feature selection to see which combination os features would be best used to help the model better predict test scores. Additionally, other regression models could be explored, such as KNN regression, to see if allowing for non-linear decision boundaries</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<div class="docutils container" id="id6">
+<dl class="citation">
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">Har20</a></span></dt>
+<dd><p>J. Hartshorne. Data: a critical period for second language acquisition: evidence from 2/3 million english speakers. <a class="reference external" href="https://osf.io/pyb8s/wiki/home/">https://osf.io/pyb8s/wiki/home/</a>, September 2020. Dataset.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id2">HTP18</a></span></dt>
+<dd><p>J. K. Hartshorne, J. B. Tenenbaum, and S. Pinker. A critical period for second language acquisition: evidence from 2/3 million english speakers. <em>Cognition</em>, 177:263–277, 2018. <a class="reference external" href="https://doi.org/10.1016/j.cognition.2018.04.007">doi:10.1016/j.cognition.2018.04.007</a>.</p>
+</dd>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id5">LM23</a></span></dt>
+<dd><p>H. L. Li and M. Practitioner’s guide to data science. 10.2 lasso. <a class="reference external" href="https://scientistcafe.com/ids/lasso">https://scientistcafe.com/ids/lasso</a>, April 2023.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id4">Sin19</a></span></dt>
+<dd><p>Deepika Singh. Linear, lasso, and ridge regression with r. <a class="reference external" href="https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r">https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r</a>, November 2019.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id3">vW23</a></span></dt>
+<dd><p>Wessel N. van Wieringen. Lecture notes on ridge regression. <a class="reference external" href="https://arxiv.org/pdf/1509.09169.pdf">https://arxiv.org/pdf/1509.09169.pdf</a>, June 2023.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods-and-results">Methods and Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda">EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-columns">Types of Columns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix">Correlation matrix</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-results">Modeling &amp; Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression-model">Ridge Regression Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression-model">Lasso Regression Model</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model Selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Salva, Atabak, Nando, Rachel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
