@@ -3,10 +3,10 @@ import pandas as pd
 import pickle
 import sys
 import dataframe_image as dfi
-sys.path.append('src')
-from helper.show_feat_coeff import show_feat_coeff
 from sklearn.metrics import PredictionErrorDisplay
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+sys.path.append("src")
+from helper.show_feat_coeff import show_feat_coeff
 
 @click.command()
 @click.option("--verbose", "-v", is_flag=True, help="Will print verbose messages.")
@@ -59,7 +59,6 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     Returns:
         None
     '''
-
     if verbose:
         click.echo("Getting the train and test data...")
     # Get train data
@@ -113,5 +112,22 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     if verbose:
         click.echo("Done!")
             
-    if __name__ == "__main__":
-        main()
+def map_to_other(df):
+    """helper function to map categories to others, used in the preprocessor"""
+    categories_list = [
+        "Graduate Degree",
+        "Some Graduate School",
+        "Undergraduate Degree (3-5 years higher ed)",
+        "Some Undergrad (higher ed)",
+        "High School Degree (12-13 years)",
+        "Haven't Finished High School (less than 13 years ed)",
+        "Didn't Finish High School (less than 13 years ed)",
+        "Others",
+    ]
+
+    return (
+        df["education"].apply(lambda x: x if x in categories_list else "Others")
+    ).to_frame()
+
+if __name__ == "__main__":
+    main()
