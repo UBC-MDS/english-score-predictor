@@ -7,6 +7,6 @@ WORKDIR /home/jovyan
 
 COPY environment.yml .
 
-RUN conda env update --file environment.yml
+RUN conda env update -n base -f environment.yml
 
 # EXPOSE 8888

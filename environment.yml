@@ -1,4 +1,4 @@
-name: temp
+name: "522"
 channels:
   - conda-forge
   - defaults
@@ -7,10 +7,12 @@ dependencies:
   - altair=5.1
   - click=8.1
   - ipykernel=6.26
+  - jupyter-book=0.15
   - jupyter_contrib_nbextensions=0.7.0
   - jupyterlab-git=0.41
   - jupyterlab=4.0
   - matplotlib=3.8
+  - myst-nb
   - numpy=1.26
   - pandas=2.1
   - pickleshare=0.7
