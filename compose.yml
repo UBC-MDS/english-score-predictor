@@ -1,5 +1,5 @@
 services:
-  analysis-env:
+  analysis-nb-server:
     build:
       context: .
       dockerfile: Dockerfile
