@@ -39,12 +39,12 @@ sys.path.append('src')
     help="Path to the preprocessor object (default: results/models/preprocessor/preprocessor.pkl)",
 )
 @click.option(
-    "--pipeline_path",
-    default="results/models/preprocessor/preprocessor.pkl",
-    help="Path to the preprocessor object (default: results/models/preprocessor/preprocessor.pkl)",
+    "--best_model_path",
+    default="results/models/ridge_best_model.pkl",
+    help="Path to the preprocessor object (default: results/models/ridge_best_model.pkl)",
 )
 
-def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_path):
+def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model_path):
     '''
         Main function for discussion and results of final model. 
         Includes reporting test score, showing feature coefficients, and plotting actual vs. predicted values
@@ -80,18 +80,18 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_p
 
     if verbose:
         click.echo("Getting and fitting the pipeline...")
-    with open(pipeline_path, "rb") as f:
-        best_pipeline = pickle.load(f)
-    best_pipeline.fit(X_train, y_train)
+    with open(best_model_path, "rb") as f:
+        best_model = pickle.load(f)
+    best_model.fit(X_train, y_train)
 
     if verbose:
         click.echo("Getting Best Test Score...")
     # Get the test score of the best model
     score = pd.DataFrame(
         {
-            "r2" : best_pipeline.score(X_test, y_test),
-            "rmse" : (mean_squared_error(X_test, best_pipeline.predict(X_test)) ** 1/2),
-            "mape" : mean_absolute_percentage_error
+            "r2" : best_model.score(X_test, y_test),
+            "rmse" : (mean_squared_error(X_test, best_model.predict(X_test)) ** 1/2),
+            "mape" : mean_absolute_percentage_error(X_test, best_model.predict(X_test))
         }
     )
     score.data.to_csv(tables_to + "test-score.csv")
@@ -99,7 +99,7 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_p
     if verbose:
         click.echo("Running the feature coefficient section...")
     # Get the feature coefficient values
-    sfc = show_feat_coeff(best_pipeline, "ridge", preprocessor)
+    sfc = show_feat_coeff(best_model, "ridge", preprocessor)
     dfi.export(sfc, plot_to + "feat-coefs.png")
     sfc.data.to_csv(tables_to + "feat-coefs.csv")
 
@@ -107,7 +107,7 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, pipeline_p
         click.echo("Plotting the actual vs predicted...")
     # Plot actual vs predicted
     ped = PredictionErrorDisplay.from_estimator(
-        best_pipeline, X_test, y_test, kind="actual_vs_predicted", subsample=None
+        best_model, X_test, y_test, kind="actual_vs_predicted", subsample=None
     ).plot()
     dfi.export(ped, plot_to + "act-vs-pred.png")
 
