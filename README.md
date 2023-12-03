@@ -134,8 +134,11 @@ python src/scripts/english_score_results.py -v \
     --tables-to="results/tables/" \
     --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
     --best_model_path="results/models/ridge_best_model.pkl"
+```
 
-# Build HTML report and copy build to docs folder
+3. Build the HTML report and copy the build to the docs folder
+
+```bash
 jupyter-book build notebooks
 cp -r notebooks/_build/html/ docs
 ```
