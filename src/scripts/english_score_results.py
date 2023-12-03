@@ -3,11 +3,10 @@ import pandas as pd
 import pickle
 import sys
 import dataframe_image as dfi
-from show_feat_coeff import show_feat_coeff
+sys.path.append('src')
+from helper.show_feat_coeff import show_feat_coeff
 from sklearn.metrics import PredictionErrorDisplay
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
-
-sys.path.append('src')
 
 @click.command()
 @click.option("--verbose", "-v", is_flag=True, help="Will print verbose messages.")
