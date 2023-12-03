@@ -11,8 +11,12 @@ RUN conda install -y numpy=1.26.* \
     matplotlib=3.8.* \
     scipy=1.11.* \
     jupyterlab=4.0.* \
-    jupyterlab-git=0.41.*
+    jupyterlab-git=0.41.* \
+    click \
+    pickleshare=0.7 \
+    jupyter_contrib_nbextensions=0.7.0
 
-RUN pip install "vegafusion[embed]"
+RUN pip install "vegafusion[embed]" \
+    dataframe_image==0.2.2
 
 EXPOSE 8888
