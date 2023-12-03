@@ -89,21 +89,37 @@ enter the following commands in the terminal in the project root:
 
 ```
 # Get train/test data:
-python src/scripts/english_score_get_data.py
+python src/scripts/english_score_get_data.py\
+   --url="https://osf.io/download/g72pq/" \
+   --output_folder_path="./data/raw"
 
 # Perform EDA: 
-python src/scripts/english_score_eda.py -v
+python src/scripts/english_score_eda.py -v \
+   --training-data="data/raw/train_data.csv" \
+   --plot-to="results/figures/" \
+   --pickle-to="results/models/preprocessor/" \
+   --tables-to="results/tables/"
 
 # Tune Models:
-python src/scripts/english_score_tuning.py -v
+python src/scripts/english_score_tuning.py -v \
+    --train="data/raw/train_data.csv" \
+    --test="data/raw/test_data.csv" \
+    --output_dir="results/" \
+    --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
 
 # Get Optimal Model Results:
-python src/scripts/english_score_results.py -v
+python src/scripts/english_score_results.py -v \
+    --train="data/raw/train_data.csv" \
+    --test="data/raw/test_data.csv" \
+    --plot-to="results/figures/" \
+    --tables-to="results/tables/" \
+    --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
+    --best_model_path="results/models/ridge_best_model.pkl"
 
 # Build HTML report and copy build to docs folder
 jupyter-book build notebooks
 cp -r notebooks/_build/html/ docs
-
+```
 
 ---
 
