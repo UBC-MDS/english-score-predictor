@@ -93,7 +93,7 @@ def main(verbose,training_data, plot_to, pickle_to, tables_to):
     # Create subplots
     for i, plot in enumerate(np.ravel(plot_1)):
         plt.subplot(rows, cols, i + 1)
-        plt.axis("off")  # Turn off axis for each subplot
+        #plt.axis("off")  # Turn off axis for each subplot
 
     # Save the numeric plots as a single figure
     plt.savefig(plot_to + "feat-numeric-figs.png")
