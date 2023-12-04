@@ -24,7 +24,7 @@ results/models/ridge_best_model.pkl: data/raw/train_data.csv data/raw/test_data.
 	--preprocessor_path="results/models/preprocessor/preprocessor.pkl"
 
 # Target for getting optimal model results
-figures/act-vs-pred.png tables/test-score.csv: data/raw/train_data.csv data/raw/test_data.csv results/models/ridge_best_model.pkl
+results/figures/act-vs-pred.png results/tables/test-score.csv: data/raw/train_data.csv data/raw/test_data.csv results/models/ridge_best_model.pkl
 	python src/scripts/english_score_results.py -v \
 	--train="data/raw/train_data.csv" \
 	--test="data/raw/test_data.csv" \
@@ -33,13 +33,11 @@ figures/act-vs-pred.png tables/test-score.csv: data/raw/train_data.csv data/raw/
 	--preprocessor_path="results/models/preprocessor/preprocessor.pkl" \
 	--best_model_path="results/models/ridge_best_model.pkl"
 
-# Build the docs
-notebooks/_build/html/docs/index.html: figures/act-vs-pred.png tables/test-score.csv
+notebooks/_build/html: results/figures/act-vs-pred.png results/tables/test-score.csv
 	jupyter-book build notebooks
 
-# move the docs to docs
-docs/index.html: notebooks/_build/html/docs/index.html
-	cp -r notebooks/_build/html/docs
+docs/index.html: notebooks/_build/html
+	cp -r notebooks/_build/html/ docs
 
 # Clean up everything
 clean:
