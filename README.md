@@ -2,6 +2,8 @@
 
 ---
 
+<img src="images/language-learning.jpg" width="700">
+
 ## 📔 About
 
 Welcome to our project, "English Language Learning Ability Prediction", an innovative venture by a team of dedicated data scientists from the Master of Data Science program at the University of British Columbia. The goal of our project was to forecast an individual's aptitude for learning by predicting their performance in an English speaking test, which is part of a quiz to assess English proficiency. This prediction is based on demographic details and their linguistic background, including factors such as the duration of their stay in English-speaking countries, their primary and native languages, among others. We aimed to develop a regression model utilizing both Ridge and Lasso models. The effectiveness of these models was evaluated using metrics like R-squared, Root Mean Squared Error (RMSE), and Negative Mean Squared Error (NMSE).
