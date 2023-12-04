@@ -2,7 +2,7 @@
 
 ---
 
-<img src="images/english-vector.jpeg" width="600">
+<img src="images/language-learning.jpg" width="700">
 
 ## 📔 About
 
