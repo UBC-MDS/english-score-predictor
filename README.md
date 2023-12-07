@@ -40,6 +40,8 @@ conda env create -f environment.yml
 conda activate 522
 ```
 
+- Now you are in the terminal with the conda environment activated. You can confirm this if you see `(522)` at the beginning of the terminal line.
+
 2. Launch Jupyter Notebook:
 
 ```bash
@@ -52,7 +54,7 @@ _Note_: If you want to close the environment, press `ctrl + c` or `cmd + c` in t
 conda deactivate 522
 ```
 
-#### Method 2: Running the code via Docker container
+#### Method 2: Running the code via Docker container (Recommended)
 
 1. Go to the project root and run the following command:
 
@@ -66,7 +68,7 @@ _Link to Docker Hub image:_ [farrandi/522-workflows-group-18](https://hub.docker
 
 3. Navigate to the analysis notebook at `work/notebooks/english_language_learning_ability_prediction_analysis.ipynb`
 
-_Note_: when you want toto close the container, press `ctrl + c` or `cmd + c` in the terminal and run the following command:
+_Note_: when you want to close the container, press `ctrl + c` or `cmd + c` in the terminal and run the following command:
 
 ```bash
 docker compose down
@@ -82,13 +84,34 @@ docker compose down
 
 ### 🏃 Running the analysis
 
-**Note:** Currently this functionality only works via the conda environment.
-
 1. Make sure you followed Method 1 in the **Setting up your environment** section.
 
-2. Navigate to the project root and run the following command.
+   1. If you are using **Method 1: conda environment**, make sure you see`(522)` at the beginning of the terminal line, like this: `(522) $username@computername:~$`
+      <br />
+   2. If you are using **Method 2: Docker container**, make sure you run the commands:
 
-These are the simple commands with all the default values to run the analysis
+   ```bash
+   docker compose run --rm analysis-nb-server bash
+   cd work # this is the project root
+   ```
+
+   Confirm this by checking that your terminal looks like: `jovyan@<some hash>:~/work$`. To exit run `exit`.
+
+<br />
+
+2. Navigate to the project root and run the following command. (For Docker users, you should already be in the project root)
+
+These are the simple commands with all the default values to run the analysis:
+
+```bash
+# clean up all the results from previous runs
+make clean
+
+# re-run the analysis
+make all
+```
+
+The above commands will run the following commands in order:
 
 ```bash
 # Get train/test data:
@@ -102,9 +125,13 @@ python src/scripts/english_score_tuning.py -v
 
 # Get Optimal Model Results:
 python src/scripts/english_score_results.py -v
+
+# Build the HTML report and copy the build to the docs folder
+jupyter-book build notebooks
+cp -r notebooks/_build/html/ docs
 ```
 
-or you can run the following commands to customize the analysis:
+Below are the same commands with complete arguments if you want to customize the analysis:
 
 ```bash
 # Get train/test data:
@@ -130,15 +157,12 @@ python src/scripts/english_score_tuning.py -v \
 python src/scripts/english_score_results.py -v \
     --train="data/raw/train_data.csv" \
     --test="data/raw/test_data.csv" \
-    --plot-to="results/figures/" \
-    --tables-to="results/tables/" \
+    --plot_to="results/figures/" \
+    --tables_to="results/tables/" \
     --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
     --best_model_path="results/models/ridge_best_model.pkl"
-```
 
-3. Build the HTML report and copy the build to the docs folder
-
-```bash
+# Build the HTML report and copy the build to the docs folder
 jupyter-book build notebooks
 cp -r notebooks/_build/html/ docs
 ```
