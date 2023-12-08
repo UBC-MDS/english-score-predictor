@@ -12,6 +12,8 @@
 **Implemented enhancements:**
 
 - [a290eb5](https://github.com/UBC-MDS/522-workflows-group-18/commit/a290eb55db4eba745c33db6f36c8456a35647503): Changed from specifying packages in docker file to using `environment.yml` file 
+- [908b58a](https://github.com/UBC-MDS/522-workflows-group-18/pull/101/commits/908b58a4099f6f096f24eae080992fc74165ae95) and [c476b28](https://github.com/UBC-MDS/522-workflows-group-18/pull/101/commits/c476b28c8e5e79e7187c707f4e85415da07485ca): Added a reference to final report (Background part)
+- [18b36c4](https://github.com/UBC-MDS/522-workflows-group-18/pull/99/commits/18b36c4ffed23ca2d4e8848275de6c9f1dd5e417): Updated license file with creative license and database
 
 
 **Merged pull requests:**
