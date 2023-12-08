@@ -1,12 +1,15 @@
 import click
 import pandas as pd
+import numpy as np
 import pickle
 import sys
 import dataframe_image as dfi
 from sklearn.metrics import PredictionErrorDisplay
-from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error,mean_absolute_error
 sys.path.append("src")
 from helper.show_feat_coeff import show_feat_coeff
+
+
 
 @click.command()
 @click.option("--verbose", "-v", is_flag=True, help="Will print verbose messages.")
@@ -84,7 +87,13 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     if verbose:
         click.echo("Getting Best Test Score...")
     # Get the test score of the best model
-    score = pd.DataFrame([best_model.score(X_test, y_test)], columns=["r2"])
+    y_pred = best_model.predict(X_test)
+    
+    r2 = best_model.score(X_test, y_test)
+    mape = mean_absolute_percentage_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    rmse = np.sqrt(mse)
+    score = pd.DataFrame([[r2, mape, mse, rmse]], columns=["r2", "mape", "mse", "rmse"])
     score.to_csv(tables_to + "test-score.csv")
 
     if verbose:
