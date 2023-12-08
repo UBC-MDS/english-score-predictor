@@ -1,7 +1,7 @@
 services:
   analysis-nb-server:
     image: farrandi/522-workflows-group-18:main
-        ports:
+    ports:
       - "8888:8888"
     volumes:
       - .:/home/jovyan
