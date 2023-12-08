@@ -96,6 +96,8 @@ def main(verbose,training_data, plot_to, pickle_to, tables_to):
         #plt.axis("off")  # Turn off axis for each subplot
 
     # Save the numeric plots as a single figure
+    # Add a title to your plot
+    plt.suptitle('Distribution of Numeric Features')
     plt.savefig(plot_to + "feat-numeric-figs.png")
 
     # Categorical features for plotting
@@ -133,6 +135,7 @@ def main(verbose,training_data, plot_to, pickle_to, tables_to):
     )
 
     # Save the categorical plots
+    plt.suptitle('Distribution of Categorical Features')
     categorical_plot.save(plot_to + "/feat-categoric-figs.png", format="png")
     
 
@@ -148,7 +151,7 @@ def main(verbose,training_data, plot_to, pickle_to, tables_to):
         click.echo("Creating Correlation Matrix...")
 
     # Generate and save the Pearson correlation matrix
-    cm = pearson_correlation_matrix(train_df[normal_cols], "seismic")
+    cm = pearson_correlation_matrix(train_df[normal_cols], "viridis")
     dfi.export(cm, plot_to + "feat-correlation-matrix.png")
 
     cm.data.to_csv(tables_to+"correlation-matrix.csv")
@@ -158,9 +161,36 @@ def main(verbose,training_data, plot_to, pickle_to, tables_to):
 
     binary_feats = ["psychiatric"]
     target = ["correct"]
+
     binary_withNA = [
         "house_Eng", "nat_Eng", "prime_Eng",
     ]
+
+    # Pairwise Correlation Plot 
+    # Generate pairwise correlation plots for numeric features
+    fig, axs = plt.subplots(len(numeric_feats), len(numeric_feats), figsize=(15, 15))
+
+    for i in range(len(numeric_feats)):
+        for j in range(len(numeric_feats)):
+            if i == j:
+                axs[i, j].hist(train_df[numeric_feats[i]].dropna(), bins=30, color='skyblue', edgecolor='black')
+            else:
+                axs[i, j].hexbin(train_df[numeric_feats[j]], train_df[numeric_feats[i]], gridsize=30, cmap='Blues')
+
+            if i < len(numeric_feats) - 1:
+                axs[i, j].xaxis.set_visible(False)
+            if j > 0:
+                axs[i, j].yaxis.set_visible(False)
+
+            if j == 0:
+                axs[i, j].set_ylabel(numeric_feats[i])
+            if i == len(numeric_feats) - 1:
+                axs[i, j].set_xlabel(numeric_feats[j])
+
+    plt.tight_layout()
+    plt.suptitle('Pairwise Correlation Plots of Numeric Features', y=1.02)
+    plt.savefig(plot_to + "/pairwise-correlation-plots.png", format="png")
+    plt.show()
 
     numeric_transformer = make_pipeline(
         SimpleImputer(strategy="median"), StandardScaler()
