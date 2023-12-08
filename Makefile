@@ -38,6 +38,7 @@ notebooks/_build/html: results/figures/act-vs-pred.png results/tables/test-score
 
 docs/index.html: notebooks/_build/html
 	cp -r notebooks/_build/html/ docs
+	if [ ! -f ".nojekyll" ]; then touch docs/.nojekyll; fi
 
 # Clean up everything
 clean:
