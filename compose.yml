@@ -1,8 +1,12 @@
 services:
   analysis-nb-server:
     image: farrandi/522-workflows-group-18:main
-    ports:
+        ports:
       - "8888:8888"
     volumes:
-      - .:/home/jovyan/work
+      - .:/home/jovyan
+    deploy:
+      resources:
+        limits:
+          memory: 5G
     platform: linux/amd64
