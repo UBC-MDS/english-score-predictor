@@ -92,10 +92,9 @@ docker compose down
 
    ```bash
    docker compose run --rm analysis-nb-server bash
-   cd work # this is the project root
    ```
 
-   Confirm this by checking that your terminal looks like: `jovyan@<some hash>:~/work$`. To exit run `exit`.
+   Confirm this by checking that your terminal looks like: `jovyan@<some hash>:~/$`. To exit run `exit`.
 
 <br />
 
@@ -109,62 +108,6 @@ make clean
 
 # re-run the analysis
 make all
-```
-
-The above commands will run the following commands in order:
-
-```bash
-# Get train/test data:
-python src/scripts/english_score_get_data.py
-
-# Perform EDA:
-python src/scripts/english_score_eda.py -v
-
-# Tune Models:
-python src/scripts/english_score_tuning.py -v
-
-# Get Optimal Model Results:
-python src/scripts/english_score_results.py -v
-
-# Build the HTML report and copy the build to the docs folder
-jupyter-book build notebooks
-cp -r notebooks/_build/html/ docs
-```
-
-Below are the same commands with complete arguments if you want to customize the analysis:
-
-```bash
-# Get train/test data:
-python src/scripts/english_score_get_data.py\
-   --url="https://osf.io/download/g72pq/" \
-   --output_folder_path="./data/raw"
-
-# Perform EDA:
-python src/scripts/english_score_eda.py -v \
-   --training-data="data/raw/train_data.csv" \
-   --plot-to="results/figures/" \
-   --pickle-to="results/models/preprocessor/" \
-   --tables-to="results/tables/"
-
-# Tune Models:
-python src/scripts/english_score_tuning.py -v \
-    --train="data/raw/train_data.csv" \
-    --test="data/raw/test_data.csv" \
-    --output_dir="results/" \
-    --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
-
-# Get Optimal Model Results:
-python src/scripts/english_score_results.py -v \
-    --train="data/raw/train_data.csv" \
-    --test="data/raw/test_data.csv" \
-    --plot_to="results/figures/" \
-    --tables_to="results/tables/" \
-    --preprocessor_path="results/models/preprocessor/preprocessor.pkl"
-    --best_model_path="results/models/ridge_best_model.pkl"
-
-# Build the HTML report and copy the build to the docs folder
-jupyter-book build notebooks
-cp -r notebooks/_build/html/ docs
 ```
 
 ---
