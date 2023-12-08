@@ -13,7 +13,7 @@ import unittest
 
 # Import the plt_regr_pred function from the src folder
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from src.plt_regr_pred import plt_regr_pred
+from src.helper.plt_regr_pred import plt_regr_pred
 
 
 class TestPltRegrPred(unittest.TestCase):
@@ -35,6 +35,8 @@ class TestPltRegrPred(unittest.TestCase):
         self.pipe_obj = pipe.fit(self.X, self.y)
 
     def test_plt_regr_pred_returns_axis(self):
+        print("Running unit tests for plt_regr_pred.py")
+
         # Test for correct return type
         _, ax = plt_regr_pred(self.X, self.y, self.pipe_obj)
         self.assertIsInstance(

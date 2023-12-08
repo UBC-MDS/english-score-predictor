@@ -126,6 +126,18 @@ docker compose run --rm analysis-nb-server make all
 
 ---
 
+### ✅ Testing the code
+
+1. Make sure you followed Method 1 in the **Setting up your environment** section.
+
+2. Navigate to the project root and run the following command.
+
+```bash
+python -m unittest discover tests
+```
+
+_Note_: There will be some windows that pop up when running the tests (You will need to close them to continue). This is expected behaviour.
+
 ## 🔍 Methodology
 
 We employ a comprehensive approach:
