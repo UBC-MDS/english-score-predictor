@@ -9,7 +9,7 @@ from sklearn.model_selection import RandomizedSearchCV, GridSearchCV
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from src.search_top_models import fit_and_return_top_models
+from src.helper.search_top_models import fit_and_return_top_models
 
 
 class TestFitAndReturnTopModels(unittest.TestCase):
@@ -44,6 +44,8 @@ class TestFitAndReturnTopModels(unittest.TestCase):
         """
         Test that the return type is a DataFrame
         """
+        print("Running unit tests for search_top_models.py")
+
         search = self.create_search_object()
         result = fit_and_return_top_models(search, 3, self.X_train, self.y_train)
         self.assertIsInstance(result, pd.DataFrame, "Result should be a DataFrame")

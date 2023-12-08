@@ -10,7 +10,7 @@ import unittest
 
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
-from src.correlation_matrix import pearson_correlation_matrix
+from src.helper.correlation_matrix import pearson_correlation_matrix
 
 
 class TestPearsonCorrelationMatrix(unittest.TestCase):
@@ -26,6 +26,8 @@ class TestPearsonCorrelationMatrix(unittest.TestCase):
         self.sample_df = pd.DataFrame(data)
 
     def test_pearson_correlation_matrix_basic(self):
+        print("Running unit tests for correlation_matrix.py")
+
         # Test basic functionality without specifying colormap
         pearson_matrix = pearson_correlation_matrix(self.sample_df)
 
