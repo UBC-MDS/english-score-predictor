@@ -110,6 +110,18 @@ make clean
 make all
 ```
 
+#### 📝 Note
+
+You can ignore steps 1 and 2 of the **Running the analysis** if you are using Docker. You can run the following command to run the analysis:
+
+```bash
+# clean up all the results from previous runs
+docker compose run --rm analysis-nb-server make clean
+
+# re-run the analysis
+docker compose run --rm analysis-nb-server make all
+```
+
 ---
 
 ## 🔍 Methodology
