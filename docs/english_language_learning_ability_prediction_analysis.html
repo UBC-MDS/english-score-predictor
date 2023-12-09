@@ -481,13 +481,13 @@ To ensure the model’s robustness, we validated its performance on a separate t
 </li>
 </ul>
 <figure class="align-default" id="feat-numeric-figs">
-<a class="reference internal image-reference" href="_images/feat-numeric-figs.png"><img alt="_images/feat-numeric-figs.png" src="_images/feat-numeric-figs.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/feat-numeric-figs.png"><img alt="_images/feat-numeric-figs.png" src="_images/feat-numeric-figs.png" style="height: 600px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 1 </span><span class="caption-text">Numeric Looking Features Distribution</span><a class="headerlink" href="#feat-numeric-figs" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="pairwise-correlation-plots">
-<a class="reference internal image-reference" href="_images/pairwise-correlation-plots.png"><img alt="_images/pairwise-correlation-plots.png" src="_images/pairwise-correlation-plots.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/pairwise-correlation-plots.png"><img alt="_images/pairwise-correlation-plots.png" src="_images/pairwise-correlation-plots.png" style="height: 600px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">2D Histogram Pairwise Correlation Plot for Numeric Features</span><a class="headerlink" href="#pairwise-correlation-plots" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -502,7 +502,7 @@ To ensure the model’s robustness, we validated its performance on a separate t
 </ul>
 <p>Also note that EDA on the training data revealed that the majority of the education levels are the 7 large categories. Therefore, all additional education levels in the other categories which have a value of 1 will be labelled as “Others” to avoid adding major dimensionality to our dataset and we will focus the major education level groupings.</p>
 <figure class="align-default" id="education-level-fig">
-<a class="reference internal image-reference" href="_images/education-level-fig.png"><img alt="_images/education-level-fig.png" src="_images/education-level-fig.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/education-level-fig.png"><img alt="_images/education-level-fig.png" src="_images/education-level-fig.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3 </span><span class="caption-text">Education Level Category distribution</span><a class="headerlink" href="#education-level-fig" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -585,7 +585,7 @@ To ensure the model’s robustness, we validated its performance on a separate t
 <h3>Model Performance<a class="headerlink" href="#model-performance" title="Permalink to this heading">#</a></h3>
 <p>We measured the performance of our model on the test data with our RMSE test score of <span class="pasted-text">0.0528</span> (a test MSE of <span class="pasted-text">0.0028</span>), as well as a MAPE of <span class="pasted-text">0.0425</span>. Our model performed well on the test data - which we can further visualize by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values. From these numbers, we can make a couple general notes on our model performance. Our <span class="math notranslate nohighlight">\(R^2\)</span> value of <span class="pasted-text">0.2424</span> means that <span class="pasted-text">24.24</span>% of the variance in the <code class="docutils literal notranslate"><span class="pre">correct</span></code> English Proficiency Score is associated with the features (as illustrated in our coefficient table above) in our model. Additionally, our RMSE of <span class="pasted-text">0.0528</span> suggests that, on average, our predictions have an error of <span class="pasted-text">5.28</span>%. We can further visualize the performance of our model by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values - we do so in <a class="reference internal" href="#act-vs-pred"><span class="std std-numref">Fig. 8</span></a> below, plotting a 2D-histogram.</p>
 <figure class="align-default" id="act-vs-pred">
-<a class="reference internal image-reference" href="_images/act-vs-pred.png"><img alt="_images/act-vs-pred.png" src="_images/act-vs-pred.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/act-vs-pred.png"><img alt="_images/act-vs-pred.png" src="_images/act-vs-pred.png" style="height: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8 </span><span class="caption-text">2D-histogram showing the actual English Proficiency Scores vs. the predicted English profciency scores using our optimal model.</span><a class="headerlink" href="#act-vs-pred" title="Permalink to this image">#</a></p>
 </figcaption>
