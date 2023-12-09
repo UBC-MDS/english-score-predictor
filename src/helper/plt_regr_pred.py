@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import colors
 
 
 def plt_regr_pred(X, y, pipe_obj):
@@ -21,6 +22,8 @@ def plt_regr_pred(X, y, pipe_obj):
 
     Returns:
     -------
+    matplotlib Figure object
+        Returns the Figure object representing the top level container for all the plot elements.
     matplotlib Axes object
         Returns the Axes object representing the subplot of actual target values against predictied target values. 
         Plot will be shown as output of calling function.
@@ -46,7 +49,7 @@ def plt_regr_pred(X, y, pipe_obj):
     # Creating new figure and set of subplots
     fig, ax = plt.subplots()
     # Plotting a 2D histogram
-    H = ax.hist2d(y, pipe_obj.predict(X), bins=50, cmap='viridis')
+    H = ax.hist2d(y, pipe_obj.predict(X), bins=(50, 50), norm = colors.LogNorm())
     # Plot the diagonal ("perfect prediction" line)
     grid = np.linspace(y.min(), y.max(), 1000)
     ax.plot(grid, grid, "--k")
@@ -57,4 +60,4 @@ def plt_regr_pred(X, y, pipe_obj):
     plt.colorbar(H[3], ax=ax, label='Frequency')
     plt.show()
 
-    return ax
+    return fig, ax

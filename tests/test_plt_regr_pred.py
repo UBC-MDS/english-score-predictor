@@ -38,7 +38,7 @@ class TestPltRegrPred(unittest.TestCase):
         print("Running unit tests for plt_regr_pred.py")
 
         # Test for correct return type
-        ax = plt_regr_pred(self.X, self.y, self.pipe_obj)
+        _, ax = plt_regr_pred(self.X, self.y, self.pipe_obj)
         self.assertIsInstance(
             ax, plt.Axes, "plt_regr_pred should return an Axes object"
         )
