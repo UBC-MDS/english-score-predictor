@@ -18,9 +18,12 @@
 - [\#103](https://github.com/UBC-MDS/522-workflows-group-18/pull/103/files): Testing automation, and Added README info to test the helper function tests easily 
 - [\#105](https://github.com/UBC-MDS/522-workflows-group-18/pull/105/files): Added more EDA plots and made the previous ones more clear for addition in report
 - [\#107](https://github.com/UBC-MDS/522-workflows-group-18/pull/107/files): Added other scoring metrics on test results 
-- [](): Fixed the Actual vs Predicted plots overplotting issue 
-- [](): Fixed wordings in report to make it more clear 
-- 
+- [ed21de4](https://github.com/UBC-MDS/522-workflows-group-18/pull/112/commits/ed21de48fa4764e5b7b62ae48bd8424acdd74358): Addressed peer review feedback (added authors to top of report, hid imports at top of report, added headings to split up discussion section, fixed variable insertion errors to account for multple test error metrics)
+- [00671aa](https://github.com/UBC-MDS/522-workflows-group-18/pull/112/commits/00671aab4dbd1d8e1ea5c676d15584dfbeee51b8): Fixed typos in diiscusson section
+- [f1e31d4](https://github.com/UBC-MDS/522-workflows-group-18/pull/112/commits/f1e31d4f148b52726b6609d8de885f670d88e8a9): Fixed the Actual vs Predicted plots overplotting issue by adding 2d histogram instead of scatter plot
+- [8eaa4f4](https://github.com/UBC-MDS/522-workflows-group-18/pull/112/commits/8eaa4f4ea9cc79d43ec0a2bfb91664f8ede63e28): Updated report to include 2D histogram changes and interpretation
+- [edcf345](https://github.com/UBC-MDS/522-workflows-group-18/pull/112/commits/edcf345d2ce4ef4faab7443ed0c87eb92eeec884): Fixed figure sizes to be consistent
+
 
 **Closed issues during Week 4:**
 
