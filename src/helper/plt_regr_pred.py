@@ -4,7 +4,7 @@ import numpy as np
 
 def plt_regr_pred(X, y, pipe_obj):
     """
-    Plot the actual target values against the predicted target values based on training
+    Plot a 2D histogram of the actual target values against the predicted target values based on training
     data used to fit a pipeline of transformers with a regression model estimator.
 
     Parameters:
@@ -29,7 +29,6 @@ def plt_regr_pred(X, y, pipe_obj):
     --------
     >>> import matplotlib.pyplot as plt
     >>> import numpy as np
-    >>> from sklearn.pipeline import Pipeline 
     >>> from sklearn.linear_model import Lasso, Ridge, LinearRegression
     >>> from sklearn.preprocessing import StandardScaler
     # Replace StandardScaler with desired preprocessing step(s)
@@ -46,14 +45,16 @@ def plt_regr_pred(X, y, pipe_obj):
     """
     # Creating new figure and set of subplots
     fig, ax = plt.subplots()
-    # Plot actual y against predicted values based on X using our pipe object
-    ax.scatter(y, pipe_obj.predict(X), alpha=0.3)
+    # Plotting a 2D histogram
+    H = ax.hist2d(y, pipe_obj.predict(X), bins=50, cmap='viridis')
     # Plot the diagonal ("perfect prediction" line)
     grid = np.linspace(y.min(), y.max(), 1000)
     ax.plot(grid, grid, "--k")
     # Add labels and show plot
     ax.set_xlabel("Actual Target")
     ax.set_ylabel("Predicted Target")
-    ax.set_title("Actual vs. Predicted Target Values")
+    ax.set_title("2D Histogram of Actual vs. Predicted Target Values")
+    plt.colorbar(H[3], ax=ax, label='Frequency')
     plt.show()
-    return fig, ax
+
+    return ax
