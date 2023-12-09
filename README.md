@@ -174,9 +174,13 @@ Your contributions can help enhance this project further. For contribution guide
 
 ## ©️ License
 
-This project is released under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+All reports contained here are licensed under the [Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License](https://creativecommons.org/licenses/by-sa/4.0/). See [the license file](LICENSE.md) for more information.
 
-All the code within this repository is released under the MIT License, promoting open-source collaboration. For more details, see [LICENSE.md](LICENSE.md).
+If re-using/re-mixing please provide attribution and link to this webpage.
+
+The software code contained within this repository is licensed under the MIT license. See [the license file](LICENSE.md) for more information.
+
+The dataset employed in this analysis is distributed under an open-source license.
 
 ## 🙏 Acknowledgments
 

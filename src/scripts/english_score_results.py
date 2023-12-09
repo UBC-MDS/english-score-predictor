@@ -4,10 +4,10 @@ import numpy as np
 import pickle
 import sys
 import dataframe_image as dfi
-from sklearn.metrics import PredictionErrorDisplay
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error,mean_absolute_error
 sys.path.append("src")
 from helper.show_feat_coeff import show_feat_coeff
+from helper.plt_regr_pred import plt_regr_pred
 
 
 
@@ -105,11 +105,9 @@ def main(verbose, train, test, plot_to, tables_to, preprocessor_path, best_model
     if verbose:
         click.echo("Plotting the actual vs predicted...")
     # Plot actual vs predicted
-    ped = PredictionErrorDisplay.from_estimator(
-        best_model, X_test, y_test, kind="actual_vs_predicted", subsample=None
-    ).plot()
-    figure = ped.figure_
-    figure.savefig(plot_to + "act-vs-pred.png")
+    fig, ax = plt_regr_pred(
+        X_test, y_test, best_model)
+    fig.savefig(plot_to + "act-vs-pred.png")
 
     if verbose:
         click.echo("Done!")
