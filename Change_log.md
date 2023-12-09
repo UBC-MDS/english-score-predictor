@@ -28,3 +28,4 @@
 - [\#96](https://github.com/UBC-MDS/522-workflows-group-18/issues/96): Peer Review Comments that were addressed 
 - [\#108](https://github.com/UBC-MDS/522-workflows-group-18/issues/108): Addressed all concerns regarding final report from peer review and group feedback
 - [\#98](https://github.com/UBC-MDS/522-workflows-group-18/issues/98): Fixed concerns regarding license
+- [\#102](https://github.com/UBC-MDS/522-workflows-group-18/issues/102): Automated the tests (Rearranged it and added the command to readme)
