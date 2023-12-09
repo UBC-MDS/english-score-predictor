@@ -331,7 +331,12 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-interpretation">Coefficient Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model Performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-next-steps">Limitations and Next Steps</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -346,17 +351,31 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="english-language-learning-ability-prediction-model">
 <h1>English Language Learning Ability Prediction Model<a class="headerlink" href="#english-language-learning-ability-prediction-model" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<p>by Atabak Alishiri, Rachel Bouwer, Farrandi Hernando, and Salva Umar</p>
+<p>2023/12/09</p>
 <section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/correlation-matrix.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">glue</span><span class="p">(</span><span class="s2">&quot;correct_age_correlation&quot;</span><span class="p">,</span> <span class="n">correlation_matrix_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;correct&#39;</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -380,21 +399,26 @@ document.write(`
 
 <span class="n">best_test_score_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../results/tables/test-score.csv&quot;</span><span class="p">)</span>
 <span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_r2&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_mape&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;mape&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_mse&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;mse&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_rmse&quot;</span><span class="p">,</span> <span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;rmse&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_rmse_percentage&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;rmse&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">glue</span><span class="p">(</span><span class="s2">&quot;best_test_score_r2_percentage&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">best_test_score_df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
-<p>In this report we attempt to build a prediction model using linear regression models to predict an individual’s English Proficiency Score based on factors such as age, education, and language background. Our final regression model used Ridge linear regression trained wth L2 regularization and was found to have an optimal alpha value of <span class="pasted-text">1.546352</span>. The performance of our model was scored across two metrics - R-squared score and Root Mean Squared Error (RMSE). Our model had a R-squared value of <span class="pasted-text">0.2424</span>, indicating that <span class="pasted-text">24.2428</span>% of the variance in the correct English Proficiency Score is associated with the features in our model and our RMSE of <span class="pasted-text">0.053178</span> suggested that, on average, our predictions have an error of <span class="pasted-text">5.3178</span>%. We analyzed the learned coefficients to determine the most. Looking at our predicted scores and the associated true English Proficiency Scores, we observed that our model performed better for higher actual English Proficiency Scores. This prediction could therefore be used in an informal setting for screening of proficiency based on certain factors - where the predicted score its just used as a baseline. The model may be useful in the initial analysis of individuals wanting to learn English - for example as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. We also interpreted the learned coefficients for our model which found that the most important features in our dataset associated with English Proficiency Scores is the <code class="docutils literal notranslate"><span class="pre">Eng_little</span></code> encoding which indicates the individual’s current level of English (e.g., native, immersion learner, non-immersion learner).</p>
+<p>In this report we attempt to build a prediction model using linear regression models to predict an individual’s English Proficiency Score based on factors such as age, education, and language background. Our final regression model used Ridge linear regression trained wth L2 regularization and was found to have an optimal alpha value of <span class="pasted-text">1.546352</span>. The performance of our model was scored across two metrics - R-squared score and Root Mean Squared Error (RMSE). Our model had a R-squared value of <span class="pasted-text">0.2424</span>, indicating that <span class="pasted-text">24.2428</span>% of the variance in the correct English Proficiency Score is associated with the features in our model and our RMSE of <span class="pasted-text">0.052821</span> suggested that, on average, our predictions have an error of <span class="pasted-text">5.2821</span>%. We analyzed the learned coefficients to determine the most. Looking at our predicted scores and the associated true English Proficiency Scores, we observed that our model performed better for higher actual English Proficiency Scores. This prediction could therefore be used in an informal setting for screening of proficiency based on certain factors - where the predicted score its just used as a baseline. The model may be useful in the initial analysis of individuals wanting to learn English - for example as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. We also interpreted the learned coefficients for our model which found that the most important features in our dataset associated with English Proficiency Scores is the <code class="docutils literal notranslate"><span class="pre">Eng_little</span></code> encoding which indicates the individual’s current level of English (e.g., native, immersion learner, non-immersion learner).</p>
 </section>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <section id="background">
 <h3>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h3>
-<p>In an increasingly interconnected world, the mastery of English language skills has ascended to critical importance. English frequently functions as the common medium of exchange in global commerce, education, and cross-border dialogue. This surge in demand has spurred extensive research into understanding the factors that contribute to successful English language learning. Various studies have explored a range of determinants, including age, educational background, language exposure, and the presence of learning disabilities like dyslexia.</p>
+<p>In an increasingly interconnected world, the mastery of English language skills has ascended to critical importance. English frequently functions as the common medium of exchange in global commerce, education, and cross-border dialogue. This surge in demand has spurred extensive research into understanding the factors that contribute to successful English language learning. Various studies have explored a range of determinants, including age, educational background, language exposure, and the presence of learning disabilities like dyslexia <span id="id1">[<a class="reference internal" href="#id13" title="Nick C. Ellis and Stefanie Wulff. Second language acquisition. In Ewa Dąbrowska and Dagmar Divjak, editors, The Handbook of Cognitive Linguistics, pages 409-431. DeGruyter Mouton, 2015.">Ellis and Wulff, 2015</a>]</span>.</p>
 <p>The concept of a critical period for language acquisition, a time during which learning a language is considerably easier and more effective, has been a focal point of debate and investigation. Research in this domain often leverages extensive datasets to analyze these factors and predict language learning outcomes, providing valuable insights for educators and learners alike.</p>
 <p>The dataset used in this study offers a rich collection of data points encompassing various demographic and linguistic variables. It includes information on native languages, the age of English language learning initiation, years spent in English-speaking environments, and the presence of psychiatric disorders or reading difficulties. This comprehensive dataset facilitates a nuanced exploration of how these diverse factors interplay to influence English language proficiency.</p>
 <p>By employing machine learning techniques and statistical analysis, this project aims to predict an individual’s proficiency in English, contributing to the broader understanding of language acquisition and offering practical applications in educational settings.</p>
@@ -405,7 +429,7 @@ document.write(`
 </section>
 <section id="dataset">
 <h3>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h3>
-<p>The dataset <span id="id1">[<a class="reference internal" href="#id7" title="J. Hartshorne. Data: a critical period for second language acquisition: evidence from 2/3 million english speakers. https://osf.io/pyb8s/wiki/home/, September 2020. Dataset.">Hartshorne, 2020</a>]</span> is associated with the study “A Critical Period for Second Language Acquisition: Evidence from 2/3 Million English Speakers,” authored by Joshua Hartshorne, Joshua Tenenbaum, and Steven Pinker <span id="id2">[<a class="reference internal" href="#id8" title="J. K. Hartshorne, J. B. Tenenbaum, and S. Pinker. A critical period for second language acquisition: evidence from 2/3 million english speakers. Cognition, 177:263–277, 2018. doi:10.1016/j.cognition.2018.04.007.">Hartshorne <em>et al.</em>, 2018</a>]</span>. It includes demographic variables, language exposure details, and responses to critical questions. The dataset encompasses a wide range of languages, educational backgrounds, and living environments and the analysis primarily focuses on monolinguals, immersion learners, and non-immersion learners, providing valuable insights for language acquisition.</p>
+<p>The dataset <span id="id2">[<a class="reference internal" href="#id8" title="J. Hartshorne. Data: a critical period for second language acquisition: evidence from 2/3 million english speakers. https://osf.io/pyb8s/wiki/home/, September 2020. Dataset.">Hartshorne, 2020</a>]</span> is associated with the study “A Critical Period for Second Language Acquisition: Evidence from 2/3 Million English Speakers,” authored by Joshua Hartshorne, Joshua Tenenbaum, and Steven Pinker <span id="id3">[<a class="reference internal" href="#id9" title="J. K. Hartshorne, J. B. Tenenbaum, and S. Pinker. A critical period for second language acquisition: evidence from 2/3 million english speakers. Cognition, 177:263–277, 2018. doi:10.1016/j.cognition.2018.04.007.">Hartshorne <em>et al.</em>, 2018</a>]</span>. It includes demographic variables, language exposure details, and responses to critical questions. The dataset encompasses a wide range of languages, educational backgrounds, and living environments and the analysis primarily focuses on monolinguals, immersion learners, and non-immersion learners, providing valuable insights for language acquisition.</p>
 <p>This dataset is publicly available and consists of a substantial collection of data points, totaling 671.5MB in size. The repository includes several key components:</p>
 <ol class="arabic simple">
 <li><p><strong>Compiled.csv</strong>: This file contains the raw data, including subjects and items that were later excluded from the analysis.</p></li>
@@ -435,7 +459,7 @@ To ensure the model’s robustness, we validated its performance on a separate t
 <h3>EDA<a class="headerlink" href="#eda" title="Permalink to this heading">#</a></h3>
 <section id="types-of-columns">
 <h4>Types of Columns<a class="headerlink" href="#types-of-columns" title="Permalink to this heading">#</a></h4>
-<p>Our EDA is not included in this report but the script can be found under <code class="docutils literal notranslate"><span class="pre">src/scripts/english_score_eda.py</span></code>. Note that the EDA script was used to output the correlation matrix as shown below (<a class="reference internal" href="#feat-correlation-matrix"><span class="std std-numref">Fig. 1</span></a>) and additional figures used to inform our EDA output can be found under <code class="docutils literal notranslate"><span class="pre">results/figures/</span></code> (<code class="docutils literal notranslate"><span class="pre">education-level-fig.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-categoric-figs.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-numeric-figs.png</span></code>).</p>
+<p>Our EDA is not included in this report but the script can be found under <code class="docutils literal notranslate"><span class="pre">src/scripts/english_score_eda.py</span></code>. Note that the EDA script was used to output the correlation matrix as shown below (<a class="reference internal" href="#feat-correlation-matrix"><span class="std std-numref">Fig. 4</span></a>) and additional figures used to inform our EDA output can be found under <code class="docutils literal notranslate"><span class="pre">results/figures/</span></code> (<code class="docutils literal notranslate"><span class="pre">education-level-fig.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-categoric-figs.png</span></code>, <code class="docutils literal notranslate"><span class="pre">feat-numeric-figs.png</span></code>).</p>
 <p>Columns that can safely be dropped after looking at the distributions and looking at the data dictionary:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Elogit</span></code>: is the exponential log of the <code class="docutils literal notranslate"><span class="pre">correct</span></code> column (since we would like to predict the <code class="docutils literal notranslate"><span class="pre">correct</span></code> score itself as our target, we can omit this tranfromatoin of the target variable from our analysis);</p></li>
@@ -456,14 +480,40 @@ To ensure the model’s robustness, we validated its performance on a separate t
 </ul>
 </li>
 </ul>
+<figure class="align-default" id="feat-numeric-figs">
+<a class="reference internal image-reference" href="_images/feat-numeric-figs.png"><img alt="_images/feat-numeric-figs.png" src="_images/feat-numeric-figs.png" style="height: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Numeric Looking Features Distribution</span><a class="headerlink" href="#feat-numeric-figs" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="pairwise-correlation-plots">
+<a class="reference internal image-reference" href="_images/pairwise-correlation-plots.png"><img alt="_images/pairwise-correlation-plots.png" src="_images/pairwise-correlation-plots.png" style="height: 600px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">2D Histogram Pairwise Correlation Plot for Numeric Features</span><a class="headerlink" href="#pairwise-correlation-plots" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>These were the identified main numeric feature columns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code>: The age of participants ranges from 7 to 89, with a mean of approximately 30.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_start</span></code>: English language proficiency at the start, with values ranging from 0 to 70.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Eng_country_yrs</span></code>: Number of years spent in an English-speaking country, with a mean of 4.44 years.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Lived_Eng_per</span></code>: Percentage of life spent in an English-speaking country, with a mean of 0.15.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">target</span></code> column is left-skewed this may be an issue for the model as it is not following the normality assumption; consider to transform the target in future improvements.</p></li>
+</ul>
 <p>Also note that EDA on the training data revealed that the majority of the education levels are the 7 large categories. Therefore, all additional education levels in the other categories which have a value of 1 will be labelled as “Others” to avoid adding major dimensionality to our dataset and we will focus the major education level groupings.</p>
+<figure class="align-default" id="education-level-fig">
+<a class="reference internal image-reference" href="_images/education-level-fig.png"><img alt="_images/education-level-fig.png" src="_images/education-level-fig.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Education Level Category distribution</span><a class="headerlink" href="#education-level-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="correlation-matrix">
 <h4>Correlation matrix<a class="headerlink" href="#correlation-matrix" title="Permalink to this heading">#</a></h4>
 <figure class="align-default" id="feat-correlation-matrix">
 <a class="reference internal image-reference" href="_images/feat-correlation-matrix.png"><img alt="_images/feat-correlation-matrix.png" src="_images/feat-correlation-matrix.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Correlation matrix for columns not dropped as mentioned above.</span><a class="headerlink" href="#feat-correlation-matrix" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Correlation matrix for columns not dropped as mentioned above.</span><a class="headerlink" href="#feat-correlation-matrix" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>There are strong negative correlations between English language-related variables <code class="docutils literal notranslate"><span class="pre">Eng_start</span></code>, <code class="docutils literal notranslate"><span class="pre">Eng_country_yrs</span></code>, <code class="docutils literal notranslate"><span class="pre">Lived_Eng_per</span></code>,<code class="docutils literal notranslate"><span class="pre">house_Eng</span></code>,<code class="docutils literal notranslate"><span class="pre">nat_Eng</span></code>,<code class="docutils literal notranslate"><span class="pre">prime_Eng</span></code>.</p>
@@ -473,49 +523,51 @@ To ensure the model’s robustness, we validated its performance on a separate t
 </section>
 <section id="modeling-results">
 <h3>Modeling &amp; Results<a class="headerlink" href="#modeling-results" title="Permalink to this heading">#</a></h3>
-<p>As discussed in the Methods summary, we will now build and test our Ridge Regression and Lasso Models</p>
+<p>As discussed in the Methods summary, we will now build and test our Ridge Regression and Lasso Models.</p>
 <section id="ridge-regression-model">
 <h4>Ridge Regression Model<a class="headerlink" href="#ridge-regression-model" title="Permalink to this heading">#</a></h4>
 <p>In this section we will be using the Ridge Regression model to predict the English Proficiency Score of a participant based on the features we have selected in the previous section.</p>
-<p>Ridge regression is a linear regression model that uses L2 regularization <span id="id3">[<a class="reference internal" href="#id10" title="Wessel N. van Wieringen. Lecture notes on ridge regression. https://arxiv.org/pdf/1509.09169.pdf, June 2023.">van Wieringen, 2023</a>]</span>. This means that the model penalizes the sum of squared coefficients <span id="id4">[<a class="reference internal" href="#id11" title="Deepika Singh. Linear, lasso, and ridge regression with r. https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r, November 2019.">Singh, 2019</a>]</span>.</p>
+<p>Ridge regression is a linear regression model that uses L2 regularization <span id="id4">[<a class="reference internal" href="#id11" title="Wessel N. van Wieringen. Lecture notes on ridge regression. https://arxiv.org/pdf/1509.09169.pdf, June 2023.">van Wieringen, 2023</a>]</span>. This means that the model penalizes the sum of squared coefficients <span id="id5">[<a class="reference internal" href="#id12" title="Deepika Singh. Linear, lasso, and ridge regression with r. https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r, November 2019.">Singh, 2019</a>]</span>.</p>
 <p>We will use the RMSE for our metric of choice to evaluate the performance of our model. This is because it would give us the same units as our target variable and would be easier to interpret. We considered using MAPE as well but since we have some values that are 0 in our target variable, we would have to drop those values and we would lose some information. We also included the R squared (the score that sklearn uses by default when you call score) in our CV results to have another, maybe more intuitive, way of assessing our model performance. Note that we set <code class="docutils literal notranslate"><span class="pre">refit='RMSE'</span></code> so that our best model that is returned has an alpha value that has the best cross-validated RMSE score.</p>
-<p>The cell below shows the top 5 alpha values and their corresponding scores (<a class="reference internal" href="#ridge-top-models-fig"><span class="std std-numref">Fig. 2</span></a>).</p>
+<p>The cell below shows the top 5 alpha values and their corresponding scores (<a class="reference internal" href="#ridge-top-models-fig"><span class="std std-numref">Fig. 5</span></a>).</p>
 <figure class="align-default" id="ridge-top-models-fig">
 <a class="reference internal image-reference" href="_images/ridge_top_models.png"><img alt="_images/ridge_top_models.png" src="_images/ridge_top_models.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Ridge model</span><a class="headerlink" href="#ridge-top-models-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Ridge model</span><a class="headerlink" href="#ridge-top-models-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>We find out that the optimal <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value for ridge is <span class="pasted-text">1.546352</span>. This corresponds to a CV RMSE of <span class="pasted-text">0.053178</span> - maximizing the <span class="math notranslate nohighlight">\(R^2\)</span> CV score to <span class="pasted-text">0.240958</span>.</p>
 </section>
 <section id="lasso-regression-model">
 <h4>Lasso Regression Model<a class="headerlink" href="#lasso-regression-model" title="Permalink to this heading">#</a></h4>
-<p>The next model that we created is a Lasso Regression model. Lasso stands for Least Absolute Shrinkage and Selection Operator and differs from Ridge Regression in that Lasso allows for feature reduction (i.e. the coefficients can be zero whereas Ridge never sets the coefficient to be zero) <span id="id5">[<a class="reference internal" href="#id9" title="H. L. Li and M. Practitioner’s guide to data science. 10.2 lasso. https://scientistcafe.com/ids/lasso, April 2023.">Li and M., 2023</a>]</span>. Like Ridge, Lasso is a linear regression model, but uses L1 regularization - penalizing the sum of the absolute values of the coefficients. Similar to the Ridge Regression modeling above, we performed 10-fold cross-validation using RMSE as our primary scoring metric.</p>
-<p>Below are the results of our randomized hyperparameter search for the top 5 alpha values and the corresponding RMSE scores and fit times ({numref}lasso_top_models-fig).</p>
+<p>The next model that we created is a Lasso Regression model. Lasso stands for Least Absolute Shrinkage and Selection Operator and differs from Ridge Regression in that Lasso allows for feature reduction (i.e. the coefficients can be zero whereas Ridge never sets the coefficient to be zero) <span id="id6">[<a class="reference internal" href="#id10" title="H. L. Li and M. Practitioner’s guide to data science. 10.2 lasso. https://scientistcafe.com/ids/lasso, April 2023.">Li and M., 2023</a>]</span>. Like Ridge, Lasso is a linear regression model, but uses L1 regularization - penalizing the sum of the absolute values of the coefficients. Similar to the Ridge Regression modeling above, we performed 10-fold cross-validation using RMSE as our primary scoring metric.</p>
+<p>Below are the results of our randomized hyperparameter search for the top 5 alpha values ({numref}lasso_top_models-fig).</p>
 <figure class="align-default" id="lasso-top-models-fig">
 <a class="reference internal image-reference" href="_images/lasso_top_models.png"><img alt="_images/lasso_top_models.png" src="_images/lasso_top_models.png" style="height: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Lasso model</span><a class="headerlink" href="#lasso-top-models-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Results of hyperparameter tuning showing cross-validation results for the top five alpha values in our Lasso model</span><a class="headerlink" href="#lasso-top-models-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>For our optimal model with an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value of <span class="pasted-text">0.002281</span>, we got a CV RMSE of <span class="pasted-text">0.054164</span>. Like Ridge, we note again that this alpha value is optimal for both RMSE and <span class="math notranslate nohighlight">\(R^2\)</span> - maximizing the <span class="math notranslate nohighlight">\(R^2\)</span> CV score to <span class="pasted-text">0.212556</span>.</p>
 </section>
 <section id="model-selection">
 <h4>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this heading">#</a></h4>
-<p>The CV RMSE and test score results from the Ridge and Lasso models detailed above are very similar, however the optimal Ridge model performs marginally better (with roughly a <span class="pasted-text">5.31779880575366</span>% RMSE on the training data). Then, scoring the optimal Ridge model on our test data, we get an R-squared score of <span class="pasted-text">0.2424</span>. We also see that the model is not overfitting since the CV and test scores are very close to each other (both rounding to <span class="pasted-text">24.242787</span>%). Therefore, our optimal model is the <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> linear model trained with L2 regularization and an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value of <span class="pasted-text">1.546352</span>.</p>
+<p>The CV RMSE and test score results from the Ridge and Lasso models detailed above are very similar, however the optimal Ridge model performs marginally better (with roughly a <span class="pasted-text">5.31779880575363</span>% RMSE on the training data). Then, scoring the optimal Ridge model on our test data, we get an R-squared score of <span class="pasted-text">0.2424</span> and an RMSE of <span class="pasted-text">0.0528</span>. We also see that the model is not overfitting since the CV and test scores are very close to each other (both rounding to <span class="pasted-text">24.242787</span>%). Therefore, our optimal model is the <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> linear model trained with L2 regularization and an <code class="docutils literal notranslate"><span class="pre">alpha</span></code> value of <span class="pasted-text">1.546352</span>.</p>
 </section>
 </section>
 </section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this heading">#</a></h2>
+<section id="coefficient-interpretation">
+<h3>Coefficient Interpretation<a class="headerlink" href="#coefficient-interpretation" title="Permalink to this heading">#</a></h3>
 <p>Looking at our optimal model, we are able to look at the learned coefficients for the model features. We interpret our results in that increasing features with positive coefficients is associated with an increased <code class="docutils literal notranslate"><span class="pre">correct</span></code> test score, whereas an increase in the features with negative coefficients is associated with decreasing <code class="docutils literal notranslate"><span class="pre">correct</span></code> test scores.</p>
 <figure class="align-default" id="feat-coefs">
-<a class="reference internal image-reference" href="_images/feat-coefs.png"><img alt="_images/feat-coefs.png" src="_images/feat-coefs.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/feat-coefs.png"><img alt="_images/feat-coefs.png" src="_images/feat-coefs.png" style="height: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Learned feature coefficients from fitting optimal Ridge model on training data.</span><a class="headerlink" href="#feat-coefs" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Learned feature coefficients from fitting optimal Ridge model on training data.</span><a class="headerlink" href="#feat-coefs" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>From the results above (<a class="reference internal" href="#feat-coefs"><span class="std std-numref">Fig. 4</span></a>), we can see that the most important features in determining a high English Proficiency Score are:</p>
+<p>From the results above (<a class="reference internal" href="#feat-coefs"><span class="std std-numref">Fig. 7</span></a>), we can see that the most important features in determining a high English Proficiency Score are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_monoeng</span></code>: This is a binary column that indicates whether the participant is a native speaker of English or not. This is the most important feature associated with increasing the English Proficiency Score.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_bileng</span></code>: This is a binary column that indicates whether the participant is native speaker of English plus at least one other language. This is the second most important feature associated with increasing the English Proficiency Score.</p></li>
@@ -528,33 +580,43 @@ To ensure the model’s robustness, we validated its performance on a separate t
 <li><p><code class="docutils literal notranslate"><span class="pre">Eng_little_little</span></code>: This is a binary column that indicates whether the participant is a non-immersion learner.</p></li>
 </ul>
 <p>This somewhat makes sense since the most important features in determining the test scores is the Eng_little encoding. If the person is a native speaker or a native speaker of English and at least one other language, they would have a higher test score. If the person is an immersion learner or a non-immersion learner, they would have a lower test score.</p>
-<p>We measured the performance of our model on the test data with our RMSE test score of <span class="pasted-text">0.0532</span> (<span class="pasted-text">5.32</span>%). Our model performed well on the test data - which we can further visualize by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values. From these numbers, we can make a couple general notes on our model performance. Our <span class="math notranslate nohighlight">\(R^2\)</span> value of <span class="pasted-text">0.2424</span> means that <span class="pasted-text">24.24</span>% of the variance in the <code class="docutils literal notranslate"><span class="pre">correct</span></code> English Proficiency Score is associated with the features (as illustrated in our coefficient table above) in our model. Additionally, our RMSE of <span class="pasted-text">0.0532</span> suggests that, on average, our predictions have an error of <span class="pasted-text">5.32</span>%. We can further visualize the deviation of our predictions from the actual test scores by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values and lookng at our residuals.</p>
+</section>
+<section id="model-performance">
+<h3>Model Performance<a class="headerlink" href="#model-performance" title="Permalink to this heading">#</a></h3>
+<p>We measured the performance of our model on the test data with our RMSE test score of <span class="pasted-text">0.0528</span> (a test MSE of <span class="pasted-text">0.0028</span>), as well as a MAPE of <span class="pasted-text">0.0425</span>. Our model performed well on the test data - which we can further visualize by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values. From these numbers, we can make a couple general notes on our model performance. Our <span class="math notranslate nohighlight">\(R^2\)</span> value of <span class="pasted-text">0.2424</span> means that <span class="pasted-text">24.24</span>% of the variance in the <code class="docutils literal notranslate"><span class="pre">correct</span></code> English Proficiency Score is associated with the features (as illustrated in our coefficient table above) in our model. Additionally, our RMSE of <span class="pasted-text">0.0528</span> suggests that, on average, our predictions have an error of <span class="pasted-text">5.28</span>%. We can further visualize the performance of our model by plotting our predicted test English Proficiency Score values against our actual test English Proficiency Score values - we do so in <a class="reference internal" href="#act-vs-pred"><span class="std std-numref">Fig. 8</span></a> below, plotting a 2D-histogram.</p>
 <figure class="align-default" id="act-vs-pred">
-<a class="reference internal image-reference" href="_images/act-vs-pred.png"><img alt="_images/act-vs-pred.png" src="_images/act-vs-pred.png" style="height: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/act-vs-pred.png"><img alt="_images/act-vs-pred.png" src="_images/act-vs-pred.png" style="height: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Scatter plot visualization of the prediction error showing the actual English Proficiency Scores vs. the predicted English profciency scores using our optimal model.</span><a class="headerlink" href="#act-vs-pred" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">2D-histogram showing the actual English Proficiency Scores vs. the predicted English profciency scores using our optimal model.</span><a class="headerlink" href="#act-vs-pred" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The scatterplot above (<a class="reference internal" href="#act-vs-pred"><span class="std std-numref">Fig. 5</span></a>) plots our predicted English Proficiency Scores from our Ridge model against the actual English Proficiency Scores. The dashed black line represents the “perfect” prediction where the predicted is equal to the actual score. We see that the majority of the examples are clustered in the English Proficiency Score range of 80-100.  We see that, as we increase the predited scores, our residuals tend to cluster more under our “perfect” dashed line. This indicates that we tend to predict higher scores as the value of the actual score decreases. We can note from the plot above that our model appears to better predict higher English Proficiency Scores - varying significantly from the actual score for lower English Proficiency Scores.</p>
-<p>Considering the limitations noted above, our model may be useful in the initial analysis of individuals wanting to learn English as a second language to make an informal prediction on an estimated level of English Proficiency. This estimated English Proficiency Score could be used as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. This work could be further explored with a more in depth look at the feature importance and the correlation between specific features in the dataset and how they are associated with test scores. This could also be improved with feature selection to see which combination os features would be best used to help the model better predict test scores. Additionally, other regression models could be explored, such as KNN regression, to see if allowing for non-linear decision boundaries</p>
+<p>The scatterplot above (<a class="reference internal" href="#act-vs-pred"><span class="std std-numref">Fig. 8</span></a>) plots our predicted English Proficiency Scores from our Ridge model against the actual English Proficiency Scores. The dashed black line represents the “perfect” prediction where the predicted is equal to the actual score. We see that the majority of the examples are clustered in the English Proficiency Score range of 80-100.  We see that, as we increase the predicted scores, our residuals tend to cluster more around our “perfect” dashed line. However, we can note from the plot above that our model appears to better predict higher English Proficiency Scores - varying significantly from the actual score for lower English Proficiency Scores.</p>
+</section>
+<section id="limitations-and-next-steps">
+<h3>Limitations and Next Steps<a class="headerlink" href="#limitations-and-next-steps" title="Permalink to this heading">#</a></h3>
+<p>Considering the limitations noted above, our model may be useful in the initial analysis of individuals wanting to learn English as a second language to make an informal prediction on an estimated level of English Proficiency. This estimated English Proficiency Score could be used as a tool to allocate the appropriate amount of resources or suggest a certain level of guidance to an individual to best facilitate their English learning. This work could be further explored with a more in depth look at the feature importance and the correlation between specific features in the dataset and how they are associated with test scores. This could also be improved with feature selection to see which combination of features would be best used to help the model better predict test scores. Additionally, other regression models could be explored, such as KNN regression, to see if allowing for non-linear decision boundaries</p>
+</section>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
-<div class="docutils container" id="id6">
+<div class="docutils container" id="id7">
 <dl class="citation">
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">Har20</a></span></dt>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">EW15</a></span></dt>
+<dd><p>Nick C. Ellis and Stefanie Wulff. Second language acquisition. In Ewa Dąbrowska and Dagmar Divjak, editors, <em>The Handbook of Cognitive Linguistics</em>, pages 409–431. DeGruyter Mouton, 2015.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id2">Har20</a></span></dt>
 <dd><p>J. Hartshorne. Data: a critical period for second language acquisition: evidence from 2/3 million english speakers. <a class="reference external" href="https://osf.io/pyb8s/wiki/home/">https://osf.io/pyb8s/wiki/home/</a>, September 2020. Dataset.</p>
 </dd>
-<dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id2">HTP18</a></span></dt>
+<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id3">HTP18</a></span></dt>
 <dd><p>J. K. Hartshorne, J. B. Tenenbaum, and S. Pinker. A critical period for second language acquisition: evidence from 2/3 million english speakers. <em>Cognition</em>, 177:263–277, 2018. <a class="reference external" href="https://doi.org/10.1016/j.cognition.2018.04.007">doi:10.1016/j.cognition.2018.04.007</a>.</p>
 </dd>
-<dt class="label" id="id9"><span class="brackets"><a class="fn-backref" href="#id5">LM23</a></span></dt>
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id6">LM23</a></span></dt>
 <dd><p>H. L. Li and M. Practitioner’s guide to data science. 10.2 lasso. <a class="reference external" href="https://scientistcafe.com/ids/lasso">https://scientistcafe.com/ids/lasso</a>, April 2023.</p>
 </dd>
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id4">Sin19</a></span></dt>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id5">Sin19</a></span></dt>
 <dd><p>Deepika Singh. Linear, lasso, and ridge regression with r. <a class="reference external" href="https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r">https://www.pluralsight.com/guides/linear-lasso-and-ridge-regression-with-r</a>, November 2019.</p>
 </dd>
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id3">vW23</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id4">vW23</a></span></dt>
 <dd><p>Wessel N. van Wieringen. Lecture notes on ridge regression. <a class="reference external" href="https://arxiv.org/pdf/1509.09169.pdf">https://arxiv.org/pdf/1509.09169.pdf</a>, June 2023.</p>
 </dd>
 </dl>
@@ -629,7 +691,12 @@ To ensure the model’s robustness, we validated its performance on a separate t
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion">Discussion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coefficient-interpretation">Coefficient Interpretation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model Performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-and-next-steps">Limitations and Next Steps</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>

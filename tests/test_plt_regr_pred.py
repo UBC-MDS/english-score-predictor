@@ -43,19 +43,12 @@ class TestPltRegrPred(unittest.TestCase):
             ax, plt.Axes, "plt_regr_pred should return an Axes object"
         )
 
-    def test_plt_regr_scatter_plot(self):
-        # Test if scatter plot was created with same number of points as records in input data frame
-        _, ax = plt_regr_pred(self.X, self.y, self.pipe_obj)
-        scatter_pts = ax.collections
-        self.assertTrue(scatter_pts)
-        self.assertEqual(len(scatter_pts[0].get_offsets()), len(self.y))
-
-    def test_plt_regr_labels(self):
+def test_plt_regr_labels(self):
         # Test if scatter plot has correct labels
         _, ax = plt_regr_pred(self.X, self.y, self.pipe_obj)
         self.assertEqual(ax.get_xlabel(), "Actual Target")
         self.assertEqual(ax.get_ylabel(), "Predicted Target")
-        self.assertEqual(ax.get_title(), "Actual vs. Predicted Target Values")
+        self.assertEqual(ax.get_title(), "2D Histogram of Actual vs. Predicted Target Values")
 
 
 if __name__ == "__main__":
