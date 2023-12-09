@@ -29,3 +29,4 @@
 - [\#108](https://github.com/UBC-MDS/522-workflows-group-18/issues/108): Addressed all concerns regarding final report from peer review and group feedback
 - [\#98](https://github.com/UBC-MDS/522-workflows-group-18/issues/98): Fixed concerns regarding license
 - [\#102](https://github.com/UBC-MDS/522-workflows-group-18/issues/102): Automated the tests (Rearranged it and added the command to readme)
+- [\#109](https://github.com/UBC-MDS/522-workflows-group-18/issues/109): Add Creative Common License in Readme and Add full names and contacts (github links) to "Team Members" section. Also rewrote "About" section.
