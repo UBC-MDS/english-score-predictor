@@ -18,7 +18,7 @@ The complete dataset is accessible at [https://osf.io/pyb8s/](https://osf.io/pyb
 
 ## Report
 
-The final report can be found [here](https://ubc-mds.github.io/522-workflows-group-18/docs/english_language_learning_ability_prediction_analysis.html).
+The final report can be found [here](https://ubc-mds.github.io/english-score-predictor/docs/english_language_learning_ability_prediction_analysis.html).
 
 ---
 
@@ -30,7 +30,7 @@ The final report can be found [here](https://ubc-mds.github.io/522-workflows-gro
 
 ```bash
 git clone
-cd 522-workflows-group-18
+cd english-score-predictor
 ```
 
 2. Make sure Docker is installed and launched on your machine.
@@ -68,7 +68,7 @@ conda deactivate 522
 docker compose up # add -d flag to run in detached mode
 ```
 
-_Link to Docker Hub image:_ [farrandi/522-workflows-group-18](https://hub.docker.com/r/farrandi/522-workflows-group-18)
+_Link to Docker Hub image:_ [farrandi/english-score-predictor](https://hub.docker.com/r/farrandi/english-score-predictor)
 
 2. Click the link in the terminal to launch Jupyter Notebook. It should look something like this: `http://127.0.0.1:8888/lab`
 
