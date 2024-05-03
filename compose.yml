@@ -1,6 +1,6 @@
 services:
   analysis-nb-server:
-    image: farrandi/522-workflows-group-18:main
+    image: farrandi/english-score-predictor:main
     ports:
       - "8888:8888"
     volumes:
